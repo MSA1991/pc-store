@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-inter bg-black text-white;
+  }
+}
+
+.hover-item {
+  @apply text-cayn hover:text-blue transition-colors;
+}
