@@ -10,6 +10,10 @@
   }
 }
 
-.hover-item {
-  @apply text-cayn hover:text-blue transition-colors;
+.section {
+  @apply bg-gray rounded-md p-2 sm:p-5;
+}
+
+.icon {
+  @apply h-6 w-6 text-blue hover:text-cayn transition-colors;
 }

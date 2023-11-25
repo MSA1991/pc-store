@@ -21,9 +21,5 @@ export default {
       },
     },
   },
-  plugins: [
-    ({ addVariant }) => {
-      addVariant('search-cancel', '&::-webkit-search-cancel-button');
-    },
-  ],
+  plugins: [],
 };
