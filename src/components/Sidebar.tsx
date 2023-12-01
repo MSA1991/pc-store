@@ -1,20 +1,37 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useGetCategoriesQuery } from '../redux/storeApi';
+import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
 
 export const Sidebar = () => {
   const { data, isLoading, isError } = useGetCategoriesQuery();
-  console.log(data, isLoading, isError);
 
   return (
-    <aside className="section w-80 h-80 z-10">
+    <aside className="section flex flex-col justify-between w-80 h-96 z-10">
       <h2 className="font-bold text-xl">Categories</h2>
 
-      {isLoading && !data && !isError && <div>Loading...</div>}
+      <nav>
+        {isLoading && !isError && <CategoriesSkeleton />}
 
-      <div className="flex flex-col space-y-2 mt-5">
-        {data &&
-          data.map((category) => <Link to={category.id}>{category.name}</Link>)}
-      </div>
+        <ul className="flex flex-col gap-2">
+          {data &&
+            data.map(({ id, name }) => (
+              <li key={id}>
+                <NavLink
+                  to={id}
+                  className={({ isActive }) =>
+                    isActive ? 'text-blue' : 'hover-text'
+                  }
+                >
+                  {name}
+                </NavLink>
+              </li>
+            ))}
+        </ul>
+      </nav>
+
+      <Link to="help" className="text-light-gray text-sm hover-text">
+        HELP
+      </Link>
     </aside>
   );
 };

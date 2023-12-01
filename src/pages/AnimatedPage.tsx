@@ -11,7 +11,7 @@ export const AnimatedPage = ({ children }: Props) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.3 }}
-      className="section w-full"
+      className="section w-full h-full"
     >
       {children}
     </m.section>

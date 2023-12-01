@@ -8,7 +8,7 @@ export const MainLayout = () => {
     <>
       <Header />
 
-      <main className="flex space-x-2 sm:space-x-5">
+      <main className="flex grow gap-2 sm:gap-5">
         <Sidebar />
         <Outlet />
       </main>

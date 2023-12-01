@@ -4,9 +4,10 @@ export default {
   theme: {
     colors: {
       white: '#FFF5D9',
-      cayn: '#BCC0FF',
-      blue: '#9499FF',
-      gray: '#32363F',
+      cayn: '#B0B5FF',
+      blue: '#8085ff',
+      'light-gray': '#677178',
+      gray: '#262930',
       black: '#1B1B1F',
     },
     fontFamily: {
@@ -19,7 +20,17 @@ export default {
       transitionDuration: {
         DEFAULT: '300ms',
       },
+      gridTemplateColumns: {
+        products: 'repeat(auto-fill, 14rem)',
+      },
+    },
+    keyframes: {
+      shimmer: {
+        '100%': { transform: 'translateX(100%)' },
+      },
     },
   },
-  plugins: [],
+
+  // eslint-disable-next-line no-undef, @typescript-eslint/no-var-requires
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };

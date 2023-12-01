@@ -29,10 +29,10 @@ export const SearchInput = ({ value, setValue }: Props) => {
 
   return (
     <label className="w-full flex items-center space-x-2 bg-black p-2 rounded-md [&_>_:first-child]:focus-within:text-blue">
-      <FaSearch className="w-4 h-4 text-gray shrink-0 transition-colors" />
+      <FaSearch className="w-4 h-4 text-light-gray shrink-0 transition-colors" />
 
       <input
-        className="w-full text-sm outline-none bg-black"
+        className="w-full text-sm outline-none bg-black placeholder:text-light-gray"
         type="text"
         placeholder="Search..."
         value={query}

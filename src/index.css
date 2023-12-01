@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-inter bg-black text-white;
+    @apply font-inter bg-black text-white scrollbar scrollbar-w-3 scrollbar-thumb-blue scrollbar-thumb-rounded-full scrollbar-track-gray;
   }
 }
 
@@ -16,4 +16,16 @@
 
 .icon {
   @apply h-6 w-6 text-blue hover:text-cayn transition-colors;
+}
+
+.hover-text {
+  @apply hover:text-cayn transition-colors;
+}
+
+.animation-skeleton {
+  @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-white/0 before:via-white/10 before:animate-[shimmer_1.5s_infinite];
+}
+
+.img-filter {
+  @apply relative before:absolute before:inset-0 before:bg-gray/10;
 }
