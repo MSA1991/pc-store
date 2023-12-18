@@ -5,6 +5,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { Home } from './pages/Home';
 import { Products } from './components/Products';
 import { Help } from './pages/Help';
+import { Product } from './components/Product';
 
 function App() {
   const location = useLocation();
@@ -16,7 +17,8 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="home" element={<Navigate to="/" replace />} />
-            <Route path="/:products" element={<Products />} />
+            <Route path="categories/:products" element={<Products />} />
+            <Route path="categories/:products/:product" element={<Product />} />
             <Route path="help" element={<Help />} />
             <Route path="*" element={<NotFound />} />
           </Route>

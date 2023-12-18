@@ -17,7 +17,7 @@ export const Sidebar = () => {
             data.map(({ id, name }) => (
               <li key={id}>
                 <NavLink
-                  to={id}
+                  to={`categories/${id}`}
                   className={({ isActive }) =>
                     isActive ? 'text-blue' : 'hover-text'
                   }
@@ -29,7 +29,7 @@ export const Sidebar = () => {
         </ul>
       </nav>
 
-      <Link to="help" className="text-light-gray text-sm hover-text">
+      <Link to="help" className="text-light-gray text-xs hover-text">
         HELP
       </Link>
     </aside>

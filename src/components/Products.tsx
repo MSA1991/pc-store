@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AnimatedPage } from '../pages/AnimatedPage';
 import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
 import { ProductCard } from './ProductCard';
 import { Button } from './UI/Button';
 import { ProductCardSkeleton } from './Skeletons/ProductCardSkeleton';
-// import { ProductCardSkeleton } from './Skeletons/ProductCardSkeleton';
 
 const initialVisibleProducts = 8;
 
@@ -14,7 +13,7 @@ export const Products = () => {
     initialVisibleProducts
   );
   const { products } = useParams();
-  const { data, isLoading, isError } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery();
   const { data: categories } = useGetCategoriesQuery();
 
   const categoryProducts = useMemo(
@@ -45,12 +44,14 @@ export const Products = () => {
         )}
 
         <div className="w-full grid grid-cols-products justify-center gap-5">
-          {isLoading && arr.map(() => <ProductCardSkeleton />)}
+          {isLoading && arr.map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {categoryProducts &&
-            categoryProducts
-              .slice(0, visibleProducts)
-              .map((product, i) => <ProductCard key={i} product={product} />)}
+            categoryProducts.slice(0, visibleProducts).map((product) => (
+              <Link to={`${product.id}`} key={product.id}>
+                <ProductCard product={product} />
+              </Link>
+            ))}
         </div>
 
         {categoryProducts && visibleProducts < categoryProducts.length && (
