@@ -26,6 +26,10 @@
   @apply hover:ring-2 ring-cayn transition-shadow;
 }
 
+.skeleton {
+  @apply bg-black rounded-md;
+}
+
 .animation-skeleton {
   @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-white/0 before:via-white/10 before:animate-[shimmer_1.5s_infinite];
 }

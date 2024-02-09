@@ -6,7 +6,7 @@ export const Sidebar = () => {
   const { data, isLoading, isError } = useGetCategoriesQuery();
 
   return (
-    <aside className="section flex flex-col justify-between w-80 h-96 z-10">
+    <aside className="section hidden lg:flex flex-col justify-between w-64 xl:w-80 h-96 z-10">
       <h2 className="font-bold text-xl">Categories</h2>
 
       <nav>
@@ -15,7 +15,7 @@ export const Sidebar = () => {
         <ul className="flex flex-col gap-2">
           {data &&
             data.map(({ id, name }) => (
-              <li key={id}>
+              <li key={id} className="w-max">
                 <NavLink
                   to={`categories/${id}`}
                   className={({ isActive }) =>

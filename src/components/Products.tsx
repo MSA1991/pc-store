@@ -43,7 +43,7 @@ export const Products = () => {
           <h2 className="mx-auto w-60 h-8 bg-black rounded-md animation-skeleton"></h2>
         )}
 
-        <div className="w-full grid grid-cols-products justify-center gap-5">
+        <div className="w-full grid grid-cols-2 md:grid-cols-4 justify-center gap-2 sm:gap-5">
           {isLoading && arr.map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {categoryProducts &&

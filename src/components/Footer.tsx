@@ -19,7 +19,7 @@ export const Footer = () => {
         </a>
       </div>
 
-      <ul className="flex space-x-5">
+      <ul className="flex gap-5">
         <li>
           <a href="https://www.facebook.com/" target="_blank">
             <FaFacebook className="icon" />

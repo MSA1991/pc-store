@@ -6,5 +6,5 @@ export type Product = {
   rating: number;
   reviews: number;
   images: string[];
-  characteristics: Record<string, string>;
+  specifications: Record<string, string>;
 };

@@ -6,6 +6,7 @@ import { useGetProductQuery } from '../redux/storeApi';
 import { Button } from './UI/Button';
 import { Price } from './Price';
 import { RatingStars } from './RatingStars';
+import { ProductSkeleton } from './Skeletons/ProductSkeleton';
 
 export const Product = () => {
   const { products = '', product = '' } = useParams();
@@ -22,10 +23,12 @@ export const Product = () => {
 
   return (
     <AnimatedPage>
-      <>
+      <div>
+        {isLoading && <ProductSkeleton />}
+
         {data && (
-          <div className="flex gap-5">
-            <div className="flex flex-col gap-5 w-2/5 shrink-0">
+          <div className="flex flex-col md:flex-row gap-5">
+            <div className="flex flex-col gap-2 sm:gap-5 w-full md:w-2/5">
               <AnimatePresence mode="wait">
                 <m.div
                   key={currentImage}
@@ -43,7 +46,7 @@ export const Product = () => {
                 </m.div>
               </AnimatePresence>
 
-              <ul className="grid grid-cols-3 gap-5">
+              <ul className="grid grid-cols-3 gap-2 sm:gap-5">
                 {data.images.map((img, i) => (
                   <li
                     key={i}
@@ -60,30 +63,32 @@ export const Product = () => {
               </ul>
             </div>
 
-            <div className="flex flex-col gap-2 w-full">
-              <h2 className="font-bold text-xl">{data.title}</h2>
+            <div className="flex flex-col gap-2 w-full md:w-3/5">
+              <h2 className="font-bold text-lg md:text-xl">{data.title}</h2>
 
               <Price price={data.price} discount={data.discount} />
 
-              <div className="flex items-center gap-2 leading-none">
+              <p className="flex items-center gap-2">
                 {data.rating}
 
                 <RatingStars rating={data.rating} />
 
-                <span className="font-extralight text-sm ">
+                <span className="font-extralight">
                   ({data.reviews} ratings)
                 </span>
-              </div>
+              </p>
 
-              <div className="my-5 leading-none">
-                <span className="font-bold">Specifications:</span>
+              <div className="my-2 md:my-5 leading-none">
+                <h3 className="font-bold text-base lg:text-xl">
+                  Specifications:
+                </h3>
 
-                <div className="flex mt-5 w-96 justify-between">
+                <div className="flex mt-2 justify-between text-sm lg:text-base">
                   <ul className="flex flex-col gap-2 flex-grow">
-                    {Object.keys(data.characteristics).map((spec, i) => (
+                    {Object.keys(data.specifications).map((spec, i) => (
                       <li
                         key={i}
-                        className="flex after:mx-1 after:flex-grow after:border-b-2 after:border-light-gray after:border-dotted"
+                        className="flex after:-translate-y-1 after:mx-1 after:flex-grow after:border-b-2 after:border-light-gray after:border-dotted"
                       >
                         {spec}
                       </li>
@@ -91,14 +96,14 @@ export const Product = () => {
                   </ul>
 
                   <ul className="flex flex-col gap-2">
-                    {Object.values(data.characteristics).map((value, i) => (
+                    {Object.values(data.specifications).map((value, i) => (
                       <li key={i}>{value}</li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="flex gap-5 w-96">
+              <div className="flex gap-5 mb-12">
                 <Button text="Add to Cart" />
                 <Button text="Add to Favorite" />
               </div>
@@ -112,9 +117,7 @@ export const Product = () => {
             </div>
           </div>
         )}
-      </>
+      </div>
     </AnimatedPage>
   );
 };
-
-// after:ml-1 after:w-10 after:inline-block after:border-b-2 after:border-light-gray after:border-dotted
