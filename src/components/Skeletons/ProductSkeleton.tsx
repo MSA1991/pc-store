@@ -1,3 +1,5 @@
+import { ButtonSkeleton } from './ButtonSkeleton';
+
 const numberOfImg = 3;
 const numberOfSpec = 5;
 
@@ -27,7 +29,7 @@ export const ProductSkeleton = () => (
         <div className="h-6 lg:h-7 w-32 skeleton animation-skeleton"></div>
 
         <div className="flex mt-2 justify-between">
-          <ul className="flex flex-col gap-2 flex-grow">
+          <ul className="flex flex-col gap-2 w-full">
             {[...Array(numberOfSpec)].map((_, i) => (
               <li
                 key={i}
@@ -39,8 +41,8 @@ export const ProductSkeleton = () => (
       </div>
 
       <div className="flex gap-5 mb-12">
-        <div className="w-full h-9 lg:h-10 skeleton animation-skeleton"></div>
-        <div className="w-full h-9 lg:h-10 skeleton animation-skeleton"></div>
+        <ButtonSkeleton wFull />
+        <ButtonSkeleton wFull />
       </div>
     </div>
   </div>

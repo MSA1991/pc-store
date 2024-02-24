@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AnimatedPage } from '../pages/AnimatedPage';
+import { AnimatedPage } from './AnimatedPage';
 import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
-import { ProductCard } from './ProductCard';
-import { Button } from './UI/Button';
-import { ProductCardSkeleton } from './Skeletons/ProductCardSkeleton';
+import { ProductCard } from '../components/ProductCard';
+import { Button } from '../components/UI/Button';
+import { ProductCardSkeleton } from '../components/Skeletons/ProductCardSkeleton';
 
 const initialVisibleProducts = 8;
 
@@ -55,9 +55,7 @@ export const Products = () => {
         </div>
 
         {categoryProducts && visibleProducts < categoryProducts.length && (
-          <div className="w-40" onClick={handleIncreaseVisibleProducts}>
-            <Button text="See More" />
-          </div>
+          <Button text="See More" onClick={handleIncreaseVisibleProducts} />
         )}
       </div>
     </AnimatedPage>

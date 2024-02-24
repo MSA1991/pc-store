@@ -6,15 +6,15 @@ export const Sidebar = () => {
   const { data, isLoading, isError } = useGetCategoriesQuery();
 
   return (
-    <aside className="section hidden lg:flex flex-col justify-between w-64 xl:w-80 h-96 z-10">
+    <aside className="section hidden lg:flex flex-col justify-between grow h-96 z-10">
       <h2 className="font-bold text-xl">Categories</h2>
 
       <nav>
         {isLoading && !isError && <CategoriesSkeleton />}
 
-        <ul className="flex flex-col gap-2">
-          {data &&
-            data.map(({ id, name }) => (
+        {data && (
+          <ul className="flex flex-col gap-2">
+            {data.map(({ id, name }) => (
               <li key={id} className="w-max">
                 <NavLink
                   to={`categories/${id}`}
@@ -26,7 +26,8 @@ export const Sidebar = () => {
                 </NavLink>
               </li>
             ))}
-        </ul>
+          </ul>
+        )}
       </nav>
 
       <Link to="help" className="text-light-gray text-xs hover-text">

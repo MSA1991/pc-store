@@ -3,9 +3,9 @@ import { AnimatePresence } from 'framer-motion';
 import { NotFound } from './pages/NotFound';
 import { MainLayout } from './layouts/MainLayout';
 import { Home } from './pages/Home';
-import { Products } from './components/Products';
+import { Products } from './pages/Products';
 import { Help } from './pages/Help';
-import { Product } from './components/Product';
+import { Product } from './pages/Product';
 
 function App() {
   const location = useLocation();

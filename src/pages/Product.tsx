@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
-import { AnimatedPage } from '../pages/AnimatedPage';
+import { AnimatedPage } from './AnimatedPage';
 import { useGetProductQuery } from '../redux/storeApi';
-import { Button } from './UI/Button';
-import { Price } from './Price';
-import { RatingStars } from './RatingStars';
-import { ProductSkeleton } from './Skeletons/ProductSkeleton';
+import { Button } from '../components/UI/Button';
+import { Price } from '../components/Price';
+import { RatingStars } from '../components/RatingStars';
+import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
 
 export const Product = () => {
   const { products = '', product = '' } = useParams();
@@ -68,7 +68,7 @@ export const Product = () => {
 
               <Price price={data.price} discount={data.discount} />
 
-              <p className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 {data.rating}
 
                 <RatingStars rating={data.rating} />
@@ -76,36 +76,27 @@ export const Product = () => {
                 <span className="font-extralight">
                   ({data.reviews} ratings)
                 </span>
-              </p>
+              </div>
 
               <div className="my-2 md:my-5 leading-none">
-                <h3 className="font-bold text-base lg:text-xl">
+                <h3 className="font-bold text-base lg:text-lg">
                   Specifications:
                 </h3>
 
-                <div className="flex mt-2 justify-between text-sm lg:text-base">
-                  <ul className="flex flex-col gap-2 flex-grow">
-                    {Object.keys(data.specifications).map((spec, i) => (
-                      <li
-                        key={i}
-                        className="flex after:-translate-y-1 after:mx-1 after:flex-grow after:border-b-2 after:border-light-gray after:border-dotted"
-                      >
-                        {spec}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <ul className="flex flex-col gap-2">
-                    {Object.values(data.specifications).map((value, i) => (
-                      <li key={i}>{value}</li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="flex flex-col gap-2 mt-2">
+                  {Object.entries(data.specifications).map(([spec, value]) => (
+                    <li key={spec} className="flex text-sm lg:text-base">
+                      <div>{spec}</div>
+                      <div className="w-2 grow mx-1 border-b-2 border-light-gray border-dotted -translate-y-1"></div>
+                      <div>{value}</div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="flex gap-5 mb-12">
-                <Button text="Add to Cart" />
-                <Button text="Add to Favorite" />
+                <Button text="Add to Cart" wFull />
+                <Button text="Add to Favorite" wFull />
               </div>
 
               <Link

@@ -14,7 +14,7 @@ export const ProductCard = ({ product }: Props) => {
         <img className="square-img" src={image} alt={title} />
       </div>
 
-      <div className="flex flex-col h-28 justify-between mt-2 p-2 text-sm font-bold sm:text-base">
+      <div className="flex flex-col h-28 justify-between mt-2 p-2 font-bold">
         <h2>{title}</h2>
 
         <Price price={price} discount={discount} />
