@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
 import { AnimatedPage } from './AnimatedPage';
 import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
 import { ProductCard } from '../components/ProductCard';

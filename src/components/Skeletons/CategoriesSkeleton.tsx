@@ -1,8 +1,8 @@
-const numberOfCategories = 7;
+const NUMBER_OF_CATEGORIES = 7;
 
 export const CategoriesSkeleton = () => (
   <ul className="flex flex-col gap-2">
-    {[...Array(numberOfCategories)].map((_, i) => (
+    {[...Array(NUMBER_OF_CATEGORIES)].map((_, i) => (
       <li key={i} className="h-6 skeleton animation-skeleton"></li>
     ))}
   </ul>

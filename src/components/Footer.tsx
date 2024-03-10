@@ -3,6 +3,21 @@ import { FaInstagram } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import { Logo } from './Logo';
 
+const socialMediaLinks = [
+  {
+    url: 'https://www.facebook.com/',
+    icon: <FaFacebook className="icon" />,
+  },
+  {
+    url: 'https://www.instagram.com',
+    icon: <FaInstagram className="icon" />,
+  },
+  {
+    url: 'https://twitter.com/',
+    icon: <FaTwitter className="icon" />,
+  },
+];
+
 export const Footer = () => {
   return (
     <footer className="section flex justify-between items-center flex-wrap">
@@ -19,22 +34,14 @@ export const Footer = () => {
         </a>
       </div>
 
-      <ul className="flex gap-5">
-        <li>
-          <a href="https://www.facebook.com/" target="_blank">
-            <FaFacebook className="icon" />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com" target="_blank">
-            <FaInstagram className="icon" />
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/" target="_blank">
-            <FaTwitter className="icon" />
-          </a>
-        </li>
+      <ul className="flex gap-2 sm:gap-5">
+        {socialMediaLinks.map(({ url, icon }, i) => (
+          <li key={i}>
+            <a href={url} target="_blank">
+              {icon}
+            </a>
+          </li>
+        ))}
       </ul>
     </footer>
   );

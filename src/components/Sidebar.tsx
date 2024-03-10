@@ -10,7 +10,7 @@ export const Sidebar = () => {
       <h2 className="font-bold text-xl">Categories</h2>
 
       <nav>
-        {isLoading && !isError && <CategoriesSkeleton />}
+        {isLoading && <CategoriesSkeleton />}
 
         {data && (
           <ul className="flex flex-col gap-2">

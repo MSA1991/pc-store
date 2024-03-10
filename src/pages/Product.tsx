@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
+
 import { AnimatedPage } from './AnimatedPage';
 import { useGetProductQuery } from '../redux/storeApi';
 import { Button } from '../components/UI/Button';
 import { Price } from '../components/Price';
-import { RatingStars } from '../components/RatingStars';
+import { RatingStars } from '../components/UI/RatingStars';
 import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
 
 export const Product = () => {

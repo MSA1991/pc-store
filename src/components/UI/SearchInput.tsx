@@ -1,34 +1,23 @@
-import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import { motion as m, AnimatePresence } from 'framer-motion';
-import useDebounce from '../../hooks/useDebounce';
 
 type Props = {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const SearchInput = ({ value, setValue }: Props) => {
-  const [query, setQuery] = useState(value);
-  const debouncedQuery = useDebounce(query);
-
-  useEffect(() => {
-    setValue(query);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedQuery]);
-
+export const SearchInput = ({ query, setQuery }: Props) => {
   const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
   const handleClearQuery = () => {
     setQuery('');
-    setValue('');
   };
 
   return (
-    <label className="w-full flex items-center space-x-2 bg-black p-2 rounded-md [&_>_:first-child]:focus-within:text-blue">
+    <label className="max-w-md flex items-center gap-1 sm:gap-2 bg-black p-1 sm:p-2 rounded-md [&_>_:first-child]:focus-within:text-blue">
       <FaSearch className="w-4 h-4 text-light-gray shrink-0 transition-colors" />
 
       <input

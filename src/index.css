@@ -4,9 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8085ff;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b0b5ff;
+}
+
 @layer base {
   body {
-    @apply font-inter bg-black text-white scrollbar scrollbar-w-3 scrollbar-thumb-blue scrollbar-thumb-rounded-full scrollbar-track-gray;
+    @apply font-inter bg-black text-white;
   }
 }
 
@@ -16,6 +30,10 @@
 
 .icon {
   @apply h-6 w-6 text-blue hover:text-cayn transition-colors;
+}
+
+.big-icon {
+  @apply h-8 w-8 text-blue hover:text-cayn transition-colors;
 }
 
 .hover-text {

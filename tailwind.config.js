@@ -20,9 +20,6 @@ export default {
       transitionDuration: {
         DEFAULT: '300ms',
       },
-      gridTemplateColumns: {
-        products: 'repeat(auto-fill, 14rem)',
-      },
     },
     keyframes: {
       shimmer: {
@@ -30,7 +27,4 @@ export default {
       },
     },
   },
-
-  // eslint-disable-next-line no-undef, @typescript-eslint/no-var-requires
-  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };
