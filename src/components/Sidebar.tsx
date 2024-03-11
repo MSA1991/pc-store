@@ -3,7 +3,7 @@ import { useGetCategoriesQuery } from '../redux/storeApi';
 import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
 
 export const Sidebar = () => {
-  const { data, isLoading, isError } = useGetCategoriesQuery();
+  const { data, isLoading } = useGetCategoriesQuery();
 
   return (
     <aside className="section hidden lg:flex flex-col justify-between grow h-96 z-10">
@@ -30,8 +30,8 @@ export const Sidebar = () => {
         )}
       </nav>
 
-      <Link to="help" className="text-light-gray text-xs hover-text">
-        HELP
+      <Link to="faq" className="text-light-gray text-xs hover-text">
+        FAQ
       </Link>
     </aside>
   );

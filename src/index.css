@@ -28,6 +28,10 @@
   @apply bg-gray rounded-md p-2 sm:p-5;
 }
 
+.page-title {
+  @apply text-xl sm:text-2xl font-bold;
+}
+
 .icon {
   @apply h-6 w-6 text-blue hover:text-cayn transition-colors;
 }

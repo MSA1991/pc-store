@@ -74,7 +74,7 @@ export const Product = () => {
 
                 <RatingStars rating={data.rating} />
 
-                <span className="font-extralight">
+                <span className="text-light-gray">
                   ({data.reviews} ratings)
                 </span>
               </div>

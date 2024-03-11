@@ -39,9 +39,9 @@ export const Products = () => {
     <AnimatedPage>
       <div className="flex flex-col gap-5 items-center">
         {categoryName ? (
-          <h2 className="text-2xl font-bold">{categoryName}</h2>
+          <h2 className="page-title">{categoryName}</h2>
         ) : (
-          <h2 className="mx-auto w-60 h-8 bg-black rounded-md animation-skeleton"></h2>
+          <h2 className="mx-auto w-48 sm:w-60 h-7 sm:h-8 skeleton animation-skeleton"></h2>
         )}
 
         <div className="w-full grid grid-cols-2 md:grid-cols-4 justify-center gap-2 sm:gap-5">

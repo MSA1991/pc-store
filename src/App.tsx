@@ -4,7 +4,7 @@ import { NotFound } from './pages/NotFound';
 import { MainLayout } from './layouts/MainLayout';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
-import { Help } from './pages/Help';
+import { FAQ } from './pages/FAQ';
 import { Product } from './pages/Product';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="categories/:products" element={<Products />} />
             <Route path="categories/:products/:product" element={<Product />} />
-            <Route path="help" element={<Help />} />
+            <Route path="faq" element={<FAQ />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
