@@ -6,6 +6,7 @@ import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
 import { ProductCard } from '../components/ProductCard';
 import { Button } from '../components/UI/Button';
 import { ProductCardSkeleton } from '../components/Skeletons/ProductCardSkeleton';
+import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
 
 const initialVisibleProducts = 8;
 
@@ -33,8 +34,6 @@ export const Products = () => {
     );
   };
 
-  const arr = new Array(initialVisibleProducts).fill(0);
-
   return (
     <AnimatedPage>
       <div className="flex flex-col gap-5 items-center">
@@ -45,7 +44,10 @@ export const Products = () => {
         )}
 
         <div className="w-full grid grid-cols-2 md:grid-cols-4 justify-center gap-2 sm:gap-5">
-          {isLoading && arr.map((_, i) => <ProductCardSkeleton key={i} />)}
+          {isLoading &&
+            [...Array(initialVisibleProducts)].map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
 
           {categoryProducts &&
             categoryProducts.slice(0, visibleProducts).map((product) => (
@@ -54,6 +56,8 @@ export const Products = () => {
               </Link>
             ))}
         </div>
+
+        {isLoading && <ButtonSkeleton />}
 
         {categoryProducts && visibleProducts < categoryProducts.length && (
           <Button text="See More" onClick={handleIncreaseVisibleProducts} />

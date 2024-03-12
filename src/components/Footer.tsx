@@ -20,23 +20,23 @@ const socialMediaLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="section flex justify-between items-center flex-wrap">
+    <footer className="section grid grid-cols-2 sm:grid-cols-[1fr_max-content_1fr] items-center gap-y-2">
       <Logo />
 
-      <div className="w-full text-center text-sm order-1 mt-5 sm:order-none sm:mt-0 sm:w-auto md:text-base">
+      <div className="text-light-gray text-sm sm:text-base justify-self-center order-1 sm:order-none col-span-2 sm:col-auto">
         Developed by{' '}
         <a
           href="https://github.com/MSA1991"
           target="_blank"
-          className="text-blue hover:text-cayn transition-colors"
+          className="text-blue hover-text"
         >
           S. Mykhalskyi
         </a>
       </div>
 
-      <ul className="flex gap-2 sm:gap-5">
-        {socialMediaLinks.map(({ url, icon }, i) => (
-          <li key={i}>
+      <ul className="flex gap-2 sm:gap-5 justify-self-end">
+        {socialMediaLinks.map(({ url, icon }) => (
+          <li key={url}>
             <a href={url} target="_blank">
               {icon}
             </a>

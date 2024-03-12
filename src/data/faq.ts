@@ -1,11 +1,11 @@
-import { Question } from '../types/Question';
+import { FAQ } from '../types/FAQ';
 
-export const questions: Question[] = [
+export const faq: FAQ[] = [
   {
     id: 1,
     question: 'What are the payment methods accepted?',
     answer:
-      'We accept credit and debit cards, bank transfers, as well as PayPal and Yandex.Money payment systems.',
+      'We accept credit and debit cards, bank transfers, as well as PayPal and WebMoney payment systems.',
   },
   {
     id: 2,
