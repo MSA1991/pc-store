@@ -43,6 +43,7 @@ export const Product = () => {
                     src={currentImage}
                     alt="current-product-image"
                     className="square-img rounded-md"
+                    loading="lazy"
                   />
                 </m.div>
               </AnimatePresence>
@@ -58,6 +59,7 @@ export const Product = () => {
                       src={img}
                       alt={`product-image-${i}`}
                       className="square-img"
+                      loading="lazy"
                     />
                   </li>
                 ))}
@@ -65,7 +67,7 @@ export const Product = () => {
             </div>
 
             <div className="flex flex-col gap-2 w-full md:w-3/5">
-              <h2 className="font-bold text-lg md:text-xl">{data.title}</h2>
+              <h2 className="section-title">{data.title}</h2>
 
               <Price price={data.price} discount={data.discount} />
 
@@ -86,10 +88,10 @@ export const Product = () => {
 
                 <ul className="flex flex-col gap-2 mt-2">
                   {Object.entries(data.specifications).map(([spec, value]) => (
-                    <li key={spec} className="flex text-sm lg:text-base">
+                    <li key={spec} className="flex gap-1 text-sm lg:text-base">
                       <div>{spec}</div>
-                      <div className="w-2 grow mx-1 border-b-2 border-light-gray border-dotted -translate-y-1"></div>
-                      <div>{value}</div>
+                      <div className="w-4 grow border-b-2 border-light-gray border-dotted -translate-y-1"></div>
+                      <div className="text-end">{value}</div>
                     </li>
                   ))}
                 </ul>
@@ -100,11 +102,8 @@ export const Product = () => {
                 <Button text="Add to Favorite" wFull />
               </div>
 
-              <Link
-                to="/"
-                className="text-light-gray text-xs hover-text mt-auto ml-auto"
-              >
-                HOME
+              <Link to="/" className="small-link hover-text mt-auto ml-auto">
+                Home
               </Link>
             </div>
           </div>

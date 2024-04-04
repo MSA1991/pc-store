@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Products } from '../types/Products';
 import { Price } from './Price';
 
@@ -6,12 +7,12 @@ type Props = {
 };
 
 export const ProductCard = ({ product }: Props) => {
-  const { image, title, price, discount } = product;
+  const { image, title, price, discount, id } = product;
 
   return (
-    <article className="overflow-hidden bg-black rounded-md hover-border">
+    <Link to={id} className="overflow-hidden block dark-item hover-border">
       <div className="filter-img">
-        <img className="square-img" src={image} alt={title} />
+        <img className="square-img" src={image} alt={title} loading="lazy" />
       </div>
 
       <div className="flex flex-col h-28 justify-between mt-2 p-2 font-bold">
@@ -19,6 +20,6 @@ export const ProductCard = ({ product }: Props) => {
 
         <Price price={price} discount={discount} />
       </div>
-    </article>
+    </Link>
   );
 };

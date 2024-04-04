@@ -27,7 +27,7 @@ export const CategorySlider = () => {
       {isLoading && <CategorySliderSkeleton />}
 
       {data && (
-        <div className="bg-black rounded-md flex gap-5 items-center p-5">
+        <div className="dark-item flex gap-5 items-center p-5">
           <div className="hidden md:block">
             <SliderButton
               direction={SliderDirection.Prev}
@@ -44,7 +44,8 @@ export const CategorySlider = () => {
             loop
             pagination={{
               el: '#pagination',
-              bulletClass: 'block w-2 h-2 rounded-full bg-cayn transition-all',
+              bulletClass:
+                'block w-2 h-2 rounded-full bg-blue hover:bg-cayn transition-all',
               bulletActiveClass: 'w-4',
               clickable: true,
             }}

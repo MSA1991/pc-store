@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
+import { motion as m, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
-import { motion as m, AnimatePresence } from 'framer-motion';
 
 type Props = {
   query: string;
@@ -8,16 +10,23 @@ type Props = {
 };
 
 export const SearchInput = ({ query, setQuery }: Props) => {
+  const location = useLocation();
+
   const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
-  const handleClearQuery = () => {
+  const clearQuery = () => {
     setQuery('');
   };
 
+  useEffect(() => {
+    clearQuery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
   return (
-    <label className="max-w-md flex items-center gap-1 sm:gap-2 bg-black p-1 sm:p-2 rounded-md [&_>_:first-child]:focus-within:text-blue">
+    <label className="max-w-md dark-item flex items-center gap-2 p-2 [&_>_:first-child]:focus-within:text-blue">
       <FaSearch className="w-4 h-4 text-light-gray shrink-0 transition-colors" />
 
       <input
@@ -38,7 +47,7 @@ export const SearchInput = ({ query, setQuery }: Props) => {
           >
             <IoClose
               className="cursor-pointer hover:text-blue transition-colors"
-              onClick={handleClearQuery}
+              onClick={clearQuery}
             />
           </m.div>
         )}

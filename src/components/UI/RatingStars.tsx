@@ -7,7 +7,7 @@ type Props = {
 const NUMBER_OF_STARS = 5;
 
 export const RatingStars = ({ rating }: Props) => {
-  const fillWidth = Math.round((rating * 100) / NUMBER_OF_STARS);
+  const width = Math.round((rating * 100) / NUMBER_OF_STARS);
 
   return (
     <div className="relative">
@@ -19,7 +19,7 @@ export const RatingStars = ({ rating }: Props) => {
 
       <div
         className="flex overflow-hidden absolute top-0 left-0"
-        style={{ width: `${fillWidth}%` }}
+        style={{ width: `${width}%` }}
       >
         {[...Array(NUMBER_OF_STARS)].map((_, i) => (
           <FaStar key={i} className="text-blue w-5 h-5 shrink-0" />

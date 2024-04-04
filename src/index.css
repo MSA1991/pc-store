@@ -4,21 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-  width: 12px;
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #8085ff;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #b0b5ff;
-}
-
 @layer base {
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #8085ff;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #b0b5ff;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
   body {
     @apply font-inter bg-black text-white;
   }
@@ -28,8 +33,16 @@
   @apply bg-gray rounded-md p-2 sm:p-5;
 }
 
+.dark-item {
+  @apply bg-black rounded-md;
+}
+
 .page-title {
-  @apply text-xl sm:text-2xl font-bold;
+  @apply font-bold text-xl sm:text-2xl;
+}
+
+.section-title {
+  @apply font-bold text-lg md:text-xl;
 }
 
 .icon {
@@ -48,10 +61,6 @@
   @apply hover:ring-2 ring-cayn transition-shadow;
 }
 
-.skeleton {
-  @apply bg-black rounded-md;
-}
-
 .animation-skeleton {
   @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-white/0 before:via-white/10 before:animate-[shimmer_1.5s_infinite];
 }
@@ -62,4 +71,8 @@
 
 .square-img {
   @apply w-full aspect-square object-cover;
+}
+
+.small-link {
+  @apply text-light-gray text-xs w-fit uppercase;
 }

@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
+import { clsx } from 'clsx';
 import { useGetCategoriesQuery } from '../redux/storeApi';
 import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
 
@@ -6,8 +7,8 @@ export const Sidebar = () => {
   const { data, isLoading } = useGetCategoriesQuery();
 
   return (
-    <aside className="section hidden lg:flex flex-col justify-between grow h-96 z-10">
-      <h2 className="font-bold text-xl">Categories</h2>
+    <div className="section flex flex-col justify-between h-96">
+      <h2 className="section-title">Categories</h2>
 
       <nav>
         {isLoading && <CategoriesSkeleton />}
@@ -15,11 +16,13 @@ export const Sidebar = () => {
         {data && (
           <ul className="flex flex-col gap-2">
             {data.map(({ id, name }) => (
-              <li key={id} className="w-max">
+              <li key={id}>
                 <NavLink
                   to={`categories/${id}`}
                   className={({ isActive }) =>
-                    isActive ? 'text-blue' : 'hover-text'
+                    clsx('hover-text', {
+                      'text-blue': isActive,
+                    })
                   }
                 >
                   {name}
@@ -30,9 +33,9 @@ export const Sidebar = () => {
         )}
       </nav>
 
-      <Link to="faq" className="text-light-gray text-xs hover-text">
+      <Link to="faq" className="small-link hover-text">
         FAQ
       </Link>
-    </aside>
+    </div>
   );
 };

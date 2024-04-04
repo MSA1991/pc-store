@@ -1,38 +1,53 @@
-import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
+import { useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import { AnimatedPage } from './AnimatedPage';
+import { ProductsList } from '../components/ProductsList';
+import { filterProducts } from '../utils/filterProducts';
 import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
-import { ProductCard } from '../components/ProductCard';
-import { Button } from '../components/UI/Button';
-import { ProductCardSkeleton } from '../components/Skeletons/ProductCardSkeleton';
-import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
-
-const initialVisibleProducts = 8;
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import {
+  clearFilter,
+  setMaxPriceInCategory,
+  setMinPriceInCategory,
+} from '../redux/filterSlice';
 
 export const Products = () => {
-  const [visibleProducts, setVisibleProducts] = useState(
-    initialVisibleProducts
-  );
   const { products } = useParams();
-  const { data, isLoading } = useGetProductsQuery();
+  const { data: productList, isLoading } = useGetProductsQuery();
   const { data: categories } = useGetCategoriesQuery();
 
+  const filter = useAppSelector(({ filter }) => filter);
+  const dispatch = useAppDispatch();
+
   const categoryProducts = useMemo(
-    () => data?.filter(({ categoryId }) => categoryId === products),
-    [products, data]
+    () => productList?.filter(({ categoryId }) => categoryId === products),
+    [productList, products]
   );
+
+  useEffect(() => {
+    if (!categoryProducts) return;
+
+    const pricesArr = categoryProducts.map(
+      ({ price, discount }) => price - discount
+    );
+    const minPriceInCategory = Math.min(...pricesArr);
+    const maxPriceInCategory = Math.max(...pricesArr);
+
+    dispatch(clearFilter());
+    dispatch(setMinPriceInCategory(minPriceInCategory));
+    dispatch(setMaxPriceInCategory(maxPriceInCategory));
+  }, [categoryProducts, dispatch]);
 
   const categoryName = useMemo(
     () => categories?.find(({ id }) => id === products)?.name,
     [products, categories]
   );
 
-  const handleIncreaseVisibleProducts = () => {
-    setVisibleProducts(
-      (_visibleProducts) => _visibleProducts + initialVisibleProducts
-    );
-  };
+  const filteredProducts = useMemo(() => {
+    if (!categoryProducts) return [];
+
+    return filterProducts(categoryProducts, filter);
+  }, [categoryProducts, filter]);
 
   return (
     <AnimatedPage>
@@ -40,28 +55,10 @@ export const Products = () => {
         {categoryName ? (
           <h2 className="page-title">{categoryName}</h2>
         ) : (
-          <h2 className="mx-auto w-48 sm:w-60 h-7 sm:h-8 skeleton animation-skeleton"></h2>
+          <div className="mx-auto w-48 sm:w-60 h-7 sm:h-8 dark-item animation-skeleton"></div>
         )}
 
-        <div className="w-full grid grid-cols-2 md:grid-cols-4 justify-center gap-2 sm:gap-5">
-          {isLoading &&
-            [...Array(initialVisibleProducts)].map((_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-
-          {categoryProducts &&
-            categoryProducts.slice(0, visibleProducts).map((product) => (
-              <Link to={`${product.id}`} key={product.id}>
-                <ProductCard product={product} />
-              </Link>
-            ))}
-        </div>
-
-        {isLoading && <ButtonSkeleton />}
-
-        {categoryProducts && visibleProducts < categoryProducts.length && (
-          <Button text="See More" onClick={handleIncreaseVisibleProducts} />
-        )}
+        <ProductsList products={filteredProducts} isLoading={isLoading} />
       </div>
     </AnimatedPage>
   );

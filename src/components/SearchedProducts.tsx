@@ -1,4 +1,4 @@
-import { useMemo, useDeferredValue } from 'react';
+import { useMemo } from 'react';
 import { useGetProductsQuery } from '../redux/storeApi';
 import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
@@ -23,8 +23,6 @@ export const SearchedProducts = ({ query }: Props) => {
       .slice(0, 20);
   }, [query, data]);
 
-  const deferredProducts = useDeferredValue(foundProducts);
-
   return (
     <m.div
       initial={{ opacity: 0, y: -10 }}
@@ -35,9 +33,9 @@ export const SearchedProducts = ({ query }: Props) => {
     >
       {isLoading && <SearchedProductsSkeleton />}
 
-      {deferredProducts.length > 0 && (
+      {foundProducts.length > 0 && (
         <ul className="flex flex-col gap-5">
-          {deferredProducts.map(
+          {foundProducts.map(
             ({ image, price, discount, title, categoryId, id }) => (
               <li key={id}>
                 <Link
@@ -45,7 +43,12 @@ export const SearchedProducts = ({ query }: Props) => {
                   className="flex gap-2 sm:gap-5 rounded-md overflow-hidden hover-border bg-black"
                 >
                   <div className="filter-img w-28">
-                    <img src={image} alt={title} className="square-img" />
+                    <img
+                      src={image}
+                      alt={title}
+                      className="square-img"
+                      loading="lazy"
+                    />
                   </div>
 
                   <div className="flex flex-col gap-2 mt-2 font-bold">
@@ -63,7 +66,7 @@ export const SearchedProducts = ({ query }: Props) => {
         </ul>
       )}
 
-      {deferredProducts.length === 0 && !isLoading && (
+      {foundProducts.length === 0 && !isLoading && (
         <p className="font-bold text-lg">No result</p>
       )}
     </m.div>

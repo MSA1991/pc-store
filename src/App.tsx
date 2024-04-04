@@ -11,20 +11,20 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="max-w-screen-xl min-h-screen flex flex-col gap-2 mx-2 py-2 sm:mx-5 sm:py-5 sm:gap-5 2xl:m-auto">
+    <MainLayout>
       <AnimatePresence mode="wait" initial={false}>
         <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="home" element={<Navigate to="/" replace />} />
-            <Route path="categories/:products" element={<Products />} />
-            <Route path="categories/:products/:product" element={<Product />} />
-            <Route path="faq" element={<FAQ />} />
-            <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Home />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
+          <Route path="categories">
+            <Route path=":products" element={<Products />} />
+            <Route path=":products/:product" element={<Product />} />
           </Route>
+          <Route path="faq" element={<FAQ />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-    </div>
+    </MainLayout>
   );
 }
 

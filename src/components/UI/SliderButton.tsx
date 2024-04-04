@@ -1,4 +1,5 @@
 import { PiNavigationArrowFill } from 'react-icons/pi';
+import { clsx } from 'clsx';
 import { SliderDirection } from '../../types/SliderDirection';
 
 type Props = {
@@ -7,15 +8,18 @@ type Props = {
 };
 
 export const SliderButton = ({ direction, handleSlideChange }: Props) => {
+  const isNext = direction === SliderDirection.Next;
+
   return (
     <button
       onClick={() => handleSlideChange(direction)}
-      className="grid place-items-center shrink-0 w-10 h-10 bg-white rounded-full hover:bg-cayn transition-colors"
+      className="grid place-items-center shrink-0 w-10 h-10 bg-blue rounded-full hover:bg-cayn transition-colors"
     >
       <PiNavigationArrowFill
-        className={`text-black text-xl ${
-          direction === SliderDirection.Next ? 'rotate-[135deg]' : '-rotate-45'
-        }`}
+        className={clsx('text-black text-xl', {
+          'rotate-[135deg]': isNext,
+          '-rotate-45': !isNext,
+        })}
       />
     </button>
   );
