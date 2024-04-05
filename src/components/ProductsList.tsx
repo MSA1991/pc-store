@@ -26,16 +26,18 @@ export const ProductsList = memo(({ products, isLoading }: Props) => {
 
   return (
     <div className="w-full flex flex-col items-center gap-5">
-      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-5">
+      <ul className="grid-container">
         {isLoading &&
           [...Array(INITIAL_VISIBLE_PRODUCTS)].map((_, i) => (
-            <ProductCardSkeleton key={i} />
+            <li key={i}>
+              <ProductCardSkeleton />
+            </li>
           ))}
 
         <AnimatePresence initial={false}>
           {products.length > 0 &&
             products.slice(0, visibleProducts).map((product) => (
-              <m.div
+              <m.li
                 layout
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
@@ -44,15 +46,13 @@ export const ProductsList = memo(({ products, isLoading }: Props) => {
                 key={product.id}
               >
                 <ProductCard product={product} />
-              </m.div>
+              </m.li>
             ))}
         </AnimatePresence>
-      </div>
+      </ul>
 
       {products.length === 0 && !isLoading && (
-        <div className="text-black uppercase text-9xl py-40 font-bold">
-          Empty
-        </div>
+        <div className="big-title text-black uppercase py-40">Empty</div>
       )}
 
       {isLoading && <ButtonSkeleton />}

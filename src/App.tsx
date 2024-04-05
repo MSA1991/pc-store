@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { FAQ } from './pages/FAQ';
 import { Product } from './pages/Product';
+import { BigSale } from './pages/BigSale';
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
             <Route path=":products" element={<Products />} />
             <Route path=":products/:product" element={<Product />} />
           </Route>
+          <Route path="big-sale" element={<BigSale />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

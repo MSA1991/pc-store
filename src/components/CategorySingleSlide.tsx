@@ -13,7 +13,7 @@ export const CategorySingleSlide = ({ category }: Props) => {
     <div className="pt-5 md:pt-10 h-96">
       <div className="flex flex-col gap-5 relative z-10">
         <h2
-          className="text-4xl lg:text-6xl font-bold text-white"
+          className="big-title"
           data-swiper-parallax-x="-500"
           data-swiper-parallax-duration="300"
         >
@@ -39,7 +39,7 @@ export const CategorySingleSlide = ({ category }: Props) => {
         data-swiper-parallax-scale="0.2"
         src={image}
         alt={name}
-        className="w-56 md:w-72 lg:w-80 absolute bottom-5 md:top-10 lg:top-5 right-0 xl:right-5"
+        className="w-56 sm:w-72 lg:w-80 absolute bottom-5 md:top-10 lg:top-5 right-0 xl:right-5"
       />
     </div>
   );

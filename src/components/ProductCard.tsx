@@ -7,10 +7,13 @@ type Props = {
 };
 
 export const ProductCard = ({ product }: Props) => {
-  const { image, title, price, discount, id } = product;
+  const { image, title, price, discount, categoryId, id } = product;
 
   return (
-    <Link to={id} className="overflow-hidden block dark-item hover-border">
+    <Link
+      to={`/categories/${categoryId}/${id}`}
+      className="overflow-hidden block dark-item hover-border"
+    >
       <div className="filter-img">
         <img className="square-img" src={image} alt={title} loading="lazy" />
       </div>

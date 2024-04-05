@@ -76,3 +76,11 @@
 .small-link {
   @apply text-light-gray text-xs w-fit uppercase;
 }
+
+.grid-container {
+  @apply w-full grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-5;
+}
+
+.big-title {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+}
