@@ -8,7 +8,7 @@ import { ButtonSkeleton } from './Skeletons/ButtonSkeleton';
 
 type Props = {
   products: Products[] | [];
-  isLoading?: boolean;
+  isLoading: boolean;
 };
 
 const INITIAL_VISIBLE_PRODUCTS = 8;

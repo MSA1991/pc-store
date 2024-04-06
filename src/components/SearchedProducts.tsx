@@ -10,6 +10,8 @@ type Props = {
   query: string;
 };
 
+const MAX_NUMBER_OF_PRODUCTS = 20;
+
 export const SearchedProducts = ({ query }: Props) => {
   const { data, isLoading } = useGetProductsQuery();
 
@@ -20,7 +22,7 @@ export const SearchedProducts = ({ query }: Props) => {
 
     return data
       .filter(({ title }) => title.toLowerCase().includes(formattedQuery))
-      .slice(0, 20);
+      .slice(0, MAX_NUMBER_OF_PRODUCTS);
   }, [query, data]);
 
   return (
@@ -51,11 +53,12 @@ export const SearchedProducts = ({ query }: Props) => {
                     />
                   </div>
 
-                  <div className="flex flex-col gap-2 mt-2 font-bold">
+                  <div>
                     <Highlighter
                       highlightClassName="bg-cayn"
                       searchWords={query.split(' ')}
                       textToHighlight={title}
+                      className="my-2 block font-bold"
                     />
                     <Price price={price} discount={discount} />
                   </div>

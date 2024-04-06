@@ -33,7 +33,7 @@ export const Sidebar = () => {
         )}
       </nav>
 
-      <Link to="faq" className="small-link hover-text">
+      <Link to="faq" className="text-light-gray text-xs w-fit hover-text">
         FAQ
       </Link>
     </div>

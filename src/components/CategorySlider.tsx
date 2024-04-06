@@ -27,7 +27,7 @@ export const CategorySlider = () => {
       {isLoading && <CategorySliderSkeleton />}
 
       {data && (
-        <div className="dark-item flex gap-5 items-center p-5">
+        <article className="dark-item flex gap-5 items-center p-5">
           <div className="hidden md:block">
             <SliderButton
               direction={SliderDirection.Prev}
@@ -68,7 +68,7 @@ export const CategorySlider = () => {
               handleSlideChange={handleSlideChange}
             />
           </div>
-        </div>
+        </article>
       )}
     </>
   );

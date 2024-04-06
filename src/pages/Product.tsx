@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
-
 import { AnimatedPage } from './AnimatedPage';
-import { useGetProductQuery } from '../redux/storeApi';
+import { useGetProductQuery, useGetProductsQuery } from '../redux/storeApi';
 import { Button } from '../components/UI/Button';
 import { Price } from '../components/Price';
 import { RatingStars } from '../components/UI/RatingStars';
 import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
+import { RelatedProducts } from '../components/RelatedProducts';
 
 export const Product = () => {
   const { products = '', product = '' } = useParams();
+  const { data: productsList, isLoading: isLoadingProducts } =
+    useGetProductsQuery();
   const { data, isLoading } = useGetProductQuery({ products, product });
   const [currentImage, setCurrentImage] = useState('');
 
@@ -22,9 +24,17 @@ export const Product = () => {
     setCurrentImage(img);
   };
 
+  const relatedProducts = useMemo(() => {
+    if (!productsList) return [];
+
+    return productsList.filter(
+      ({ categoryId, id }) => categoryId === products && id !== product
+    );
+  }, [productsList, products, product]);
+
   return (
     <AnimatedPage>
-      <div>
+      <div className="flex flex-col gap-5">
         {isLoading && <ProductSkeleton />}
 
         {data && (
@@ -72,7 +82,7 @@ export const Product = () => {
               <Price price={data.price} discount={data.discount} />
 
               <div className="flex items-center gap-2">
-                {data.rating}
+                {data.rating.toFixed(1)}
 
                 <RatingStars rating={data.rating} />
 
@@ -97,17 +107,19 @@ export const Product = () => {
                 </ul>
               </div>
 
-              <div className="flex gap-5 mb-12">
+              <div className="flex gap-5">
                 <Button text="Add to Cart" wFull />
                 <Button text="Add to Favorite" wFull />
               </div>
-
-              <Link to="/" className="small-link hover-text mt-auto ml-auto">
-                Home
-              </Link>
             </div>
           </div>
         )}
+
+        <RelatedProducts
+          text="Related products"
+          isLoading={isLoadingProducts}
+          products={relatedProducts}
+        />
       </div>
     </AnimatedPage>
   );
