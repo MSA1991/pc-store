@@ -13,7 +13,7 @@ export const AnimatedPage = ({ children, hFull }: Props) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.3 }}
-      className={clsx('section w-full lg:w-4/5', {
+      className={clsx('section w-full shrink-0 lg:w-4/5', {
         'h-fit': !hFull,
       })}
     >

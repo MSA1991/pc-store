@@ -1,14 +1,15 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { clsx } from 'clsx';
 import { useGetCategoriesQuery } from '../redux/storeApi';
 import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
+import { FAQLink } from './FAQLink';
 
 export const Sidebar = () => {
   const { data, isLoading } = useGetCategoriesQuery();
 
   return (
     <div className="section flex flex-col justify-between h-96">
-      <h2 className="section-title">Categories</h2>
+      <h3 className="section-title">Categories</h3>
 
       <nav>
         {isLoading && <CategoriesSkeleton />}
@@ -33,9 +34,7 @@ export const Sidebar = () => {
         )}
       </nav>
 
-      <Link to="faq" className="text-light-gray text-xs w-fit hover-text">
-        FAQ
-      </Link>
+      <FAQLink />
     </div>
   );
 };

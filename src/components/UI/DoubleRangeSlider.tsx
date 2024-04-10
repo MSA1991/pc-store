@@ -60,29 +60,37 @@ export const DoubleRangeSlider = memo(
     return (
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            name="min"
-            className="w-10 grow dark-item outline-none p-1"
-            value={String(currentMinValue)}
-            min={minValue}
-            max={maxValueForMinInput}
-            onChange={handleChangeCurrentValue}
-            onBlur={handleSetValidValues}
-          />
+          <div className="flex gap-1 w-10 grow dark-item p-1">
+            <input
+              type="number"
+              name="min"
+              className="w-full bg-black outline-none"
+              value={String(currentMinValue)}
+              min={minValue}
+              max={maxValueForMinInput}
+              onChange={handleChangeCurrentValue}
+              onBlur={handleSetValidValues}
+            />
+
+            <span className="text-light-gray">$</span>
+          </div>
 
           <span>-</span>
 
-          <input
-            type="number"
-            name="max"
-            className="w-10 grow dark-item outline-none p-1"
-            value={String(currentMaxValue)}
-            min={minValueForMaxInput}
-            max={maxValue}
-            onChange={handleChangeCurrentValue}
-            onBlur={handleSetValidValues}
-          />
+          <div className="flex gap-1 w-10 grow dark-item p-1">
+            <input
+              type="number"
+              name="max"
+              className="w-full bg-black outline-none"
+              value={String(currentMaxValue)}
+              min={minValueForMaxInput}
+              max={maxValue}
+              onChange={handleChangeCurrentValue}
+              onBlur={handleSetValidValues}
+            />
+
+            <span className="text-light-gray">$</span>
+          </div>
         </div>
 
         <Slider

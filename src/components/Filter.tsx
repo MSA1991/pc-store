@@ -61,8 +61,13 @@ export const Filter = () => {
 
   return (
     <m.div
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
+      initial={{ opacity: 0, x: -100, display: 'none' }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        display: 'block',
+        transition: { delay: 0.3 },
+      }}
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.3 }}
       className="section h-80"
