@@ -33,6 +33,10 @@
   @apply bg-gray rounded-md p-2 sm:p-5;
 }
 
+.section-fixed-padding {
+  @apply bg-gray rounded-md p-5;
+}
+
 .dark-item {
   @apply bg-black rounded-md;
 }

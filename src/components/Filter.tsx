@@ -70,7 +70,7 @@ export const Filter = () => {
       }}
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.3 }}
-      className="section h-80"
+      className="section-fixed-padding h-80"
     >
       <form
         className="h-full flex flex-col justify-between"

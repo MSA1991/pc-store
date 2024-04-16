@@ -31,7 +31,7 @@ export const SearchedProducts = ({ query }: Props) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.3 }}
-      className="max-w-[444px] max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0 right-0 mr-auto ml-auto rounded-md p-2 bg-gray ring-2 ring-blue z-20"
+      className="max-w-[444px] max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray ring-2 ring-blue z-20"
     >
       {isLoading && <SearchedProductsSkeleton />}
 

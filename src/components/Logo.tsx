@@ -5,11 +5,11 @@ export const Logo = () => {
   return (
     <Link
       to="/"
-      className="w-max flex gap-2 items-center [&_>_:first-child]:hover:text-cayn"
+      className="w-max flex gap-1 items-center [&_>_:first-child]:hover:text-cayn md:gap-2"
     >
-      <LuCpu className="big-icon" />
+      <LuCpu className="w-7 h-7 text-blue transition-colors md:w-8 md:h-8" />
 
-      <span className="hidden text-xl font-bold sm:block">PC Store</span>
+      <span className="section-title">PC Store</span>
     </Link>
   );
 };

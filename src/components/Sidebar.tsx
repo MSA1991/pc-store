@@ -1,40 +1,34 @@
-import { NavLink } from 'react-router-dom';
-import { clsx } from 'clsx';
-import { useGetCategoriesQuery } from '../redux/storeApi';
-import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
-import { FAQLink } from './FAQLink';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Filter } from './Filter';
+import { Categories } from './Categories';
+import { Advertisement } from './Advertisement';
 
-export const Sidebar = () => {
-  const { data, isLoading } = useGetCategoriesQuery();
+type Props = {
+  onMobile?: boolean;
+};
+
+export const Sidebar = ({ onMobile }: Props) => {
+  const { pathname } = useLocation();
+
+  const isProductsPage = useMemo(() => {
+    const productsName = pathname.split('/').pop();
+
+    return pathname === `/categories/${productsName}`;
+  }, [pathname]);
 
   return (
-    <div className="section flex flex-col justify-between h-96">
-      <h3 className="section-title">Categories</h3>
+    <aside className="flex flex-col gap-5">
+      <Categories />
 
-      <nav>
-        {isLoading && <CategoriesSkeleton />}
+      <AnimatePresence initial={false}>
+        {isProductsPage && <Filter />}
+      </AnimatePresence>
 
-        {data && (
-          <ul className="flex flex-col gap-2">
-            {data.map(({ id, name }) => (
-              <li key={id}>
-                <NavLink
-                  to={`categories/${id}`}
-                  className={({ isActive }) =>
-                    clsx('hover-text', {
-                      'text-blue': isActive,
-                    })
-                  }
-                >
-                  {name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        )}
-      </nav>
-
-      <FAQLink />
-    </div>
+      <AnimatePresence initial={false}>
+        {!isProductsPage && !onMobile && <Advertisement />}
+      </AnimatePresence>
+    </aside>
   );
 };
