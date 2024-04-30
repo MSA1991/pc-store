@@ -1,5 +1,5 @@
 import { motion as m } from 'framer-motion';
-import { IoCheckmarkSharp } from 'react-icons/io5';
+import { IoCheckmarkSharp, IoCallSharp } from 'react-icons/io5';
 
 const services = [
   'Computer setup',
@@ -32,10 +32,14 @@ export const Advertisement = () => (
       ))}
     </ul>
 
-    <p className="font-bold text-sm">
-      Call now{' '}
-      <a href="tel:0123456789" className="text-blue hover-text">
-        0123456789
+    <p className="flex gap-2 items-center">
+      <IoCallSharp className="w-5 h-5 text-light-gray" />
+
+      <a
+        href="tel:(505) 503-4455"
+        className="text-blue hover-text font-bold text-sm"
+      >
+        (505) 503-4455
       </a>
     </p>
   </m.div>

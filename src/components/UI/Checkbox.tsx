@@ -1,4 +1,3 @@
-import { clsx } from 'clsx';
 import { motion as m, AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
 
@@ -14,12 +13,7 @@ export const Checkbox = memo(({ label, checked, onToggleChecked }: Props) => (
     onClick={onToggleChecked}
   >
     <svg
-      className={clsx(
-        'h-4 w-4 text-black rounded-sm bg-blue transition-colors',
-        {
-          'bg-cayn': checked,
-        }
-      )}
+      className={'h-4 w-4 text-blue rounded-sm bg-black transition-colors'}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

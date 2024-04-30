@@ -1,44 +1,56 @@
 import { useEffect } from 'react';
-import { motion as m, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
+import { motion as m, AnimatePresence } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
+import { InputIcon } from './InputIcon';
 
 type Props = {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  placeholder: string;
+  type: 'text' | 'search' | 'email' | 'password';
+  onBlur?: () => void;
 };
 
-export const SearchInput = ({ query, setQuery }: Props) => {
-  const location = useLocation();
+export const Input = ({
+  value,
+  setValue,
+  placeholder,
+  type,
+  onBlur,
+}: Props) => {
+  const { pathname } = useLocation();
 
   const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+    setValue(e.target.value);
   };
 
-  const clearQuery = () => {
-    setQuery('');
+  const clearValue = () => {
+    setValue('');
   };
 
   useEffect(() => {
-    clearQuery();
+    if (value) {
+      clearValue();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
-    <label className="max-w-md dark-item flex items-center gap-2 p-2 [&_>_:first-child]:focus-within:text-blue">
-      <FaSearch className="w-4 h-4 text-light-gray shrink-0 transition-colors" />
+    <label className="w-full max-w-md dark-item flex items-center gap-2 p-2 [&_>_:first-child]:focus-within:text-blue">
+      <InputIcon type={type} />
 
       <input
         className="w-full text-sm outline-none bg-black placeholder:text-light-gray"
-        type="text"
-        placeholder="Search..."
-        value={query}
+        type={type}
+        placeholder={placeholder}
+        value={value}
         onChange={handleChangeQuery}
+        onBlur={onBlur}
       />
 
       <AnimatePresence>
-        {query && (
+        {value && type === 'search' && (
           <m.div
             initial={{ opacity: 0, scale: 0.5, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -47,7 +59,7 @@ export const SearchInput = ({ query, setQuery }: Props) => {
           >
             <IoClose
               className="cursor-pointer hover:text-blue transition-colors"
-              onClick={clearQuery}
+              onClick={clearValue}
             />
           </m.div>
         )}

@@ -36,22 +36,18 @@ export const Filter = () => {
 
   const handleChangeSortingByPrice = useCallback((option: SortingOptions) => {
     filterChange('sortingByPrice', option);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleToggleOnlySale = useCallback(() => {
     filterChange('onlySale', !onlySale);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onlySale]);
 
   const handleChangeMinPrice = useCallback((value: number) => {
     filterChange('minPrice', value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangeMaxPrice = useCallback((value: number) => {
     filterChange('maxPrice', value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -7,6 +7,8 @@ import { Products } from './pages/Products';
 import { FAQ } from './pages/FAQ';
 import { Product } from './pages/Product';
 import { BigSale } from './pages/BigSale';
+import { LogIn } from './pages/LogIn';
+import { SignUp } from './pages/SignUp';
 
 function App() {
   const location = useLocation();
@@ -23,6 +25,8 @@ function App() {
           </Route>
           <Route path="big-sale" element={<BigSale />} />
           <Route path="faq" element={<FAQ />} />
+          <Route path="login" element={<LogIn />} />
+          <Route path="signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

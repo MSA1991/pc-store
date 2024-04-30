@@ -20,7 +20,7 @@ const socialMediaLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="section grid grid-cols-2 sm:grid-cols-[1fr_max-content_1fr] items-center gap-y-2">
+    <footer className="section grid grid-cols-2 sm:grid-cols-[1fr_max-content_1fr] items-center gap-y-5">
       <Logo />
 
       <div className="text-light-gray text-sm sm:text-base justify-self-center order-1 sm:order-none col-span-2 sm:col-auto">
