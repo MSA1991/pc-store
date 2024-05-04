@@ -52,7 +52,9 @@ export const ProductsList = memo(({ products, isLoading }: Props) => {
       </ul>
 
       {products.length === 0 && !isLoading && (
-        <div className="big-title text-black uppercase py-40">Empty</div>
+        <div className="big-title text-black uppercase py-40">
+          list is empty
+        </div>
       )}
 
       {isLoading && <ButtonSkeleton />}

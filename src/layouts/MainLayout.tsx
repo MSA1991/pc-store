@@ -6,20 +6,20 @@ type Props = {
   children: JSX.Element;
 };
 
-export const MainLayout = ({ children }: Props) => {
-  return (
-    <div className="max-w-screen-xl min-h-screen flex flex-col gap-2 mx-2 py-2 sm:mx-5 sm:py-5 sm:gap-5 2xl:m-auto overflow-hidden">
-      <Header />
+export const MainLayout = ({ children }: Props) => (
+  <div className="max-w-screen-xl min-h-screen flex flex-col gap-2 mx-2 py-2 sm:mx-5 sm:py-5 sm:gap-5 2xl:m-auto">
+    <Header />
 
-      <main className="flex grow gap-5">
-        <aside className="hidden lg:block grow z-10 min-w-[200px]">
-          <Sidebar />
-        </aside>
+    <div className="flex grow gap-5">
+      <aside className="hidden lg:block grow z-10">
+        <Sidebar />
+      </aside>
 
+      <main className="w-full lg:w-[calc(80%-20px)] xl:w-4/5 shrink-0">
         {children}
       </main>
-
-      <Footer />
     </div>
-  );
-};
+
+    <Footer />
+  </div>
+);

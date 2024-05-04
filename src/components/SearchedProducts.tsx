@@ -36,7 +36,7 @@ export const SearchedProducts = ({ query }: Props) => {
       {isLoading && <SearchedProductsSkeleton />}
 
       {foundProducts.length > 0 && (
-        <ul className="flex flex-col gap-5">
+        <ul className="flex flex-col gap-2">
           {foundProducts.map(
             ({ image, price, discount, title, categoryId, id }) => (
               <li key={id}>

@@ -2,6 +2,8 @@ import { memo, useEffect, useState } from 'react';
 import Slider from 'react-slider';
 
 type Props = {
+  presetMinValue: number;
+  presetMaxValue: number;
   minValue: number;
   maxValue: number;
   onChangeMinValue: (value: number) => void;
@@ -11,18 +13,26 @@ type Props = {
 const MIN_DISTANCE = 10;
 
 export const DoubleRangeSlider = memo(
-  ({ minValue, maxValue, onChangeMinValue, onChangeMaxValue }: Props) => {
-    const [values, setValues] = useState<[number, number]>([
-      minValue,
-      maxValue,
-    ]);
+  ({
+    presetMaxValue,
+    presetMinValue,
+    minValue,
+    maxValue,
+    onChangeMinValue,
+    onChangeMaxValue,
+  }: Props) => {
+    const initialMinValue = presetMinValue || minValue;
+    const initialMaxValue = presetMaxValue || maxValue;
+
+    const [values, setValues] = useState([initialMinValue, initialMaxValue]);
     const [currentMinValue, currentMaxValue] = values;
 
     const maxValueForMinInput = currentMaxValue - MIN_DISTANCE;
     const minValueForMaxInput = currentMinValue + MIN_DISTANCE;
 
     useEffect(() => {
-      setValues([minValue, maxValue]);
+      setValues([initialMinValue, initialMaxValue]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [minValue, maxValue]);
 
     const setValuesInFilter = (min: number, max: number) => {

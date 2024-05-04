@@ -6,18 +6,17 @@ type Props = {
   hFull?: boolean;
 };
 
-export const AnimatedPage = ({ children, hFull }: Props) => {
-  return (
-    <m.section
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.3 }}
-      className={clsx('section w-full shrink-0 lg:w-4/5', {
-        'h-fit': !hFull,
-      })}
-    >
-      {children}
-    </m.section>
-  );
-};
+export const AnimatedPage = ({ children, hFull }: Props) => (
+  <m.section
+    initial={{ opacity: 0, x: 100 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -100 }}
+    transition={{ duration: 0.3 }}
+    className={clsx('section', {
+      'h-fit': !hFull,
+      'h-full': hFull,
+    })}
+  >
+    {children}
+  </m.section>
+);

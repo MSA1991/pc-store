@@ -13,7 +13,7 @@ export const SliderButton = ({ direction, handleSlideChange }: Props) => {
   return (
     <button
       onClick={() => handleSlideChange(direction)}
-      className="grid place-items-center shrink-0 w-10 h-10 bg-blue rounded-full hover:bg-cayn transition-colors"
+      className="grid place-items-center w-10 h-10 bg-blue rounded-full hover:bg-cayn transition-colors"
     >
       <PiNavigationArrowFill
         className={clsx('text-black text-xl', {

@@ -16,8 +16,8 @@ export const filterProducts = (
   } = filter;
 
   if (
-    minPrice > minPriceInCategory ||
-    (maxPrice < maxPriceInCategory && maxPrice > minPriceInCategory)
+    (minPrice > 0 && minPrice > minPriceInCategory) ||
+    (maxPrice > 0 && maxPrice < maxPriceInCategory)
   ) {
     filteredProducts = filteredProducts.filter(({ price, discount }) => {
       const fullPrice = price - discount;
@@ -32,11 +32,9 @@ export const filterProducts = (
 
   if (sortingByPrice) {
     filteredProducts.sort((a, b) => {
-      if (sortingByPrice === SortingOptions.ASC) {
-        return a.price - b.price;
-      }
-
-      return b.price - a.price;
+      return sortingByPrice === SortingOptions.ASC
+        ? a.price - b.price
+        : b.price - a.price;
     });
   }
 

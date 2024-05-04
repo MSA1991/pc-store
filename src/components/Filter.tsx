@@ -16,7 +16,7 @@ const options: SortingOptions[] = Object.values(SortingOptions);
 
 export const Filter = () => {
   const filter = useAppSelector(({ filter }) => filter);
-  const { minPriceInCategory, maxPriceInCategory } = filter;
+  const { minPrice, maxPrice, minPriceInCategory, maxPriceInCategory } = filter;
 
   const [productsFilter, setProductsFilter] = useState<ProductsFilter>(filter);
   const { onlySale, sortingByPrice } = productsFilter;
@@ -74,6 +74,8 @@ export const Filter = () => {
       >
         <div className="flex flex-col gap-5">
           <DoubleRangeSlider
+            presetMinValue={minPrice}
+            presetMaxValue={maxPrice}
             minValue={minPriceInCategory}
             maxValue={maxPriceInCategory}
             onChangeMinValue={handleChangeMinPrice}
