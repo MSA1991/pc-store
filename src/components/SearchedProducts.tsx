@@ -2,9 +2,12 @@ import { useMemo } from 'react';
 import { useGetProductsQuery } from '../redux/storeApi';
 import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Highlighter from 'react-highlight-words';
 import { Price } from './Price';
 import { SearchedProductsSkeleton } from './Skeletons/SearchedProductsSkeleton';
+
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 type Props = {
   query: string;
@@ -44,12 +47,14 @@ export const SearchedProducts = ({ query }: Props) => {
                   to={`categories/${categoryId}/${id}`}
                   className="flex gap-2 sm:gap-5 rounded-md overflow-hidden hover-border bg-black"
                 >
-                  <div className="filter-img w-28">
-                    <img
+                  <div className="w-28 aspect-square">
+                    <LazyLoadImage
                       src={image}
                       alt={title}
                       className="square-img"
-                      loading="lazy"
+                      width="100%"
+                      height="100%"
+                      effect="blur"
                     />
                   </div>
 

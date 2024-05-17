@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { AnimatedPage } from './AnimatedPage';
 import { useGetProductQuery, useGetProductsQuery } from '../redux/storeApi';
 import { Button } from '../components/UI/Button';
@@ -8,6 +9,8 @@ import { Price } from '../components/Price';
 import { RatingStars } from '../components/UI/RatingStars';
 import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
 import { RelatedProducts } from '../components/RelatedProducts';
+
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export const Product = () => {
   const { products = '', product = '' } = useParams();
@@ -47,13 +50,15 @@ export const Product = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="filter-img"
+                  className="w-full aspect-square rounded-md overflow-hidden"
                 >
-                  <img
+                  <LazyLoadImage
                     src={currentImage}
                     alt="current-product-image"
-                    className="square-img rounded-md"
-                    loading="lazy"
+                    className="square-img"
+                    width="100%"
+                    height="100%"
+                    effect="blur"
                   />
                 </m.div>
               </AnimatePresence>
@@ -62,14 +67,16 @@ export const Product = () => {
                 {data.images.map((img, i) => (
                   <li
                     key={i}
-                    className="filter-img cursor-pointer hover-border rounded-md overflow-hidden"
+                    className="cursor-pointer hover-border rounded-md overflow-hidden"
                     onClick={() => handleChangeCurrentImage(img)}
                   >
-                    <img
+                    <LazyLoadImage
                       src={img}
                       alt={`product-image-${i}`}
                       className="square-img"
-                      loading="lazy"
+                      width="100%"
+                      height="100%"
+                      effect="blur"
                     />
                   </li>
                 ))}

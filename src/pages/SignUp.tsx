@@ -1,27 +1,80 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { FaGoogle, FaFacebookF } from 'react-icons/fa';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { auth, storage } from '../firebase';
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { PhotoUploader } from '../components/UI/PhotoUploader';
+import { SignUpForm } from '../types/Forms';
+import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
+import { Or } from '../components/Or';
+import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
+import { useAppDispatch } from '../redux/hooks';
+import { setUser } from '../redux/userSlice';
 
 const MAX_PHOTO_SIZE_KB = 300;
 
 export const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
     getValues,
     setValue,
     trigger,
-  } = useForm({
+  } = useForm<SignUpForm>({
     mode: 'onBlur',
+    defaultValues: {
+      userPhoto: null,
+      userName: '',
+      userEmail: '',
+      userPassword: '',
+      confirmedPassword: '',
+    },
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const handleSignUp = handleSubmit(async (data) => {
+    const { userPhoto, userName, userEmail, userPassword } = data;
+
+    try {
+      setIsLoading(true);
+
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        userEmail,
+        userPassword
+      );
+
+      const user = credential.user;
+      let photoURL = null;
+
+      if (userPhoto) {
+        const photoId = user.uid;
+        const formatPhoto = userPhoto.type.split('/').at(-1);
+        const storageRef = ref(storage, `images/${photoId}.${formatPhoto}`);
+
+        await uploadBytes(storageRef, userPhoto);
+        photoURL = await getDownloadURL(storageRef);
+      }
+
+      await updateProfile(user, { displayName: userName, photoURL });
+
+      dispatch(setUser({ name: userName, email: userEmail, photo: photoURL }));
+      navigate('/home');
+    } catch (error) {
+      console.error(error);
+      reset();
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   const changeUserPhoto = async (file: File) => {
@@ -33,8 +86,8 @@ export const SignUp = () => {
     <AnimatedPage hFull>
       <div className="grid place-items-center h-full py-10">
         <form
-          onSubmit={onSubmit}
-          className="w-full max-w-[300px] flex flex-col gap-5 items-center py-10"
+          onSubmit={handleSignUp}
+          className="w-full max-w-[280px] flex flex-col gap-5 items-center py-10"
         >
           <div className="relative">
             <Controller
@@ -43,9 +96,11 @@ export const SignUp = () => {
               rules={{
                 validate: {
                   format: (file) =>
+                    !file ||
                     ['image/jpeg', 'image/png'].includes(file.type) ||
                     'The photo must have a JPEG or PNG extension',
                   size: (file) =>
+                    !file ||
                     file.size < MAX_PHOTO_SIZE_KB * 1024 ||
                     `Max photo size ${MAX_PHOTO_SIZE_KB}kB`,
                 },
@@ -57,7 +112,6 @@ export const SignUp = () => {
               <p className="absolute w-max -bottom-4 left-1/2 -translate-x-1/2 text-xs text-center text-cayn">{`${errors.userPhoto.message}`}</p>
             )}
           </div>
-
           <div className="w-full relative">
             <Controller
               control={control}
@@ -84,7 +138,6 @@ export const SignUp = () => {
               <p className="absolute -bottom-4 left-0 text-xs text-cayn">{`${errors.userName.message}`}</p>
             )}
           </div>
-
           <div className="w-full relative">
             <Controller
               control={control}
@@ -111,7 +164,6 @@ export const SignUp = () => {
               <p className="absolute -bottom-4 left-0 text-xs text-cayn">{`${errors.userEmail.message}`}</p>
             )}
           </div>
-
           <div className="w-full relative">
             <Controller
               control={control}
@@ -138,11 +190,10 @@ export const SignUp = () => {
               <p className="absolute -bottom-4 left-0 text-xs text-cayn">{`${errors.userPassword.message}`}</p>
             )}
           </div>
-
           <div className="w-full relative">
             <Controller
               control={control}
-              name="confirmPassword"
+              name="confirmedPassword"
               rules={{
                 required: 'Enter your password again',
                 minLength: {
@@ -164,23 +215,18 @@ export const SignUp = () => {
               )}
             />
 
-            {errors.confirmPassword && (
-              <p className="absolute -bottom-4 left-0 text-xs text-cayn">{`${errors.confirmPassword.message}`}</p>
+            {errors.confirmedPassword && (
+              <p className="absolute -bottom-4 left-0 text-xs text-cayn">{`${errors.confirmedPassword.message}`}</p>
             )}
           </div>
+          {isLoading ? (
+            <ButtonSkeleton wFull />
+          ) : (
+            <Button text="Sign Up" type="submit" wFull />
+          )}
+          <Or />
 
-          <Button text="Sign Up" type="submit" wFull />
-
-          <div className="w-full flex gap-2 items-center">
-            <div className="h-1 bg-black rounded-full grow"></div>
-            <div className="text-sm uppercase font-thin">Or</div>
-            <div className="h-1 bg-black rounded-full grow"></div>
-          </div>
-
-          <div className="w-full flex gap-5">
-            <Button icon={FaGoogle} wFull />
-            <Button icon={FaFacebookF} wFull />
-          </div>
+          <LogInWithSocialMedia />
 
           <div className="text-light-gray">
             Already have an account?{' '}

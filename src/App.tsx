@@ -10,8 +10,38 @@ import { BigSale } from './pages/BigSale';
 import { LogIn } from './pages/LogIn';
 import { SignUp } from './pages/SignUp';
 
+import { SignOut } from './pages/SignOut';
+import { auth } from './firebase';
+import { useEffect } from 'react';
+import { useAppDispatch } from './redux/hooks';
+import { setUser } from './redux/userSlice';
+
 function App() {
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, email, photoURL } = user;
+
+        if (!displayName || !email) {
+          return;
+        }
+
+        dispatch(
+          setUser({
+            name: displayName,
+            email,
+            photo: photoURL,
+          })
+        );
+      }
+    });
+
+    return unsub;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <MainLayout>
@@ -27,6 +57,7 @@ function App() {
           <Route path="faq" element={<FAQ />} />
           <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="signout" element={<SignOut />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

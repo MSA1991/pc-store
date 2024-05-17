@@ -10,11 +10,13 @@ import { NotificationIcon } from './UI/NotificationIcon';
 import { SearchedProducts } from './SearchedProducts';
 import { BurgerButton } from './UI/BurgerButton';
 import { SidebarMenu } from './SidebarMenu';
+import { useAppSelector } from '../redux/hooks';
 
 export const Header = () => {
   const [query, setQuery] = useState('');
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const deferredQuery = useDeferredValue(query);
+  const user = useAppSelector(({ user }) => user.currentUser);
 
   const toggleMenu = () => {
     if (!isOpenMenu) {
@@ -57,9 +59,19 @@ export const Header = () => {
           <FiShoppingCart className="icon" />
         </NotificationIcon>
 
-        <Link to="login">
-          <CgProfile className="big-icon" strokeWidth={0} />
-        </Link>
+        {user?.photo ? (
+          <Link to="/signout">
+            <img
+              src={user.photo}
+              alt="user photo"
+              className="w-8 square-img rounded-full ring-cayn transition-all hover:ring-2"
+            />
+          </Link>
+        ) : (
+          <Link to={user ? '/signout' : '/login'}>
+            <CgProfile className="big-icon" strokeWidth={0} />
+          </Link>
+        )}
       </div>
 
       <AnimatePresence>

@@ -77,12 +77,8 @@
   @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-white/0 before:via-white/10 before:animate-[shimmer_1.5s_infinite];
 }
 
-.filter-img {
-  @apply relative before:absolute before:inset-0 before:bg-gray/10;
-}
-
 .square-img {
-  @apply w-full aspect-square object-cover;
+  @apply inline-block aspect-square object-cover;
 }
 
 .grid-container {

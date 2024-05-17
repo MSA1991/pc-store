@@ -1,31 +1,69 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { AnimatedPage } from './AnimatedPage';
+import {
+  browserLocalPersistence,
+  browserSessionPersistence,
+  setPersistence,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { CgProfile } from 'react-icons/cg';
-import { FaGoogle, FaFacebookF } from 'react-icons/fa';
+import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { Checkbox } from '../components/UI/Checkbox';
+import { auth } from '../firebase';
+import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
+import { LogInForm } from '../types/Forms';
+import { Or } from '../components/Or';
+import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
 
 export const LogIn = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<LogInForm>({
     mode: 'onBlur',
+    defaultValues: {
+      userEmail: '',
+      userPassword: '',
+      rememberUser: false,
+    },
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const handleLogIn = handleSubmit(async (data) => {
+    const { userEmail, userPassword, rememberUser } = data;
+
+    try {
+      setIsLoading(true);
+
+      const persistence = rememberUser
+        ? browserLocalPersistence
+        : browserSessionPersistence;
+
+      await setPersistence(auth, persistence);
+
+      await signInWithEmailAndPassword(auth, userEmail, userPassword);
+      navigate('/home');
+    } catch (error) {
+      console.log(error);
+      reset();
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
     <AnimatedPage hFull>
-      <div className="grid place-items-center h-full">
+      <div className="grid place-items-center h-full py-10">
         <form
-          onSubmit={onSubmit}
-          className="w-full max-w-[300px] flex flex-col gap-5 items-center py-10"
+          onSubmit={handleLogIn}
+          className="w-full max-w-[280px] flex flex-col gap-5 items-center py-10"
         >
           <CgProfile className="w-32 h-32 text-black" />
 
@@ -97,18 +135,15 @@ export const LogIn = () => {
             />
           </div>
 
-          <Button text="Log In" type="submit" wFull />
+          {isLoading ? (
+            <ButtonSkeleton wFull />
+          ) : (
+            <Button text="Log In" wFull type="submit" />
+          )}
 
-          <div className="w-full flex gap-2 items-center">
-            <div className="h-1 bg-black rounded-full grow"></div>
-            <div className="text-sm uppercase font-thin">Or</div>
-            <div className="h-1 bg-black rounded-full grow"></div>
-          </div>
+          <Or />
 
-          <div className="w-full flex gap-5">
-            <Button icon={FaGoogle} wFull />
-            <Button icon={FaFacebookF} wFull />
-          </div>
+          <LogInWithSocialMedia />
 
           <div className="text-light-gray">
             Don't have an account{' '}
