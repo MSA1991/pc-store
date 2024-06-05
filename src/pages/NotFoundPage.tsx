@@ -1,6 +1,6 @@
 import { AnimatedPage } from './AnimatedPage';
 
-export const NotFound = () => {
+export const NotFoundPage = () => {
   return (
     <AnimatedPage hFull>
       <div className="h-full flex flex-col justify-center items-center">

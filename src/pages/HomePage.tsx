@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { Banner } from '../components/Banner';
 import { CategorySlider } from '../components/CategorySlider';
 import { RelatedProducts } from '../components/RelatedProducts';
-import { useGetProductsQuery } from '../redux/storeApi';
+import { useGetProductsQuery } from '../store/storeApi';
 import { AnimatedPage } from './AnimatedPage';
 
-export const Home = () => {
+export const HomePage = () => {
   const { data, isLoading } = useGetProductsQuery();
 
   const popularProducts = useMemo(() => (data ? data : []), [data]);

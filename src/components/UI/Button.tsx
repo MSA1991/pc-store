@@ -1,33 +1,29 @@
 import { clsx } from 'clsx';
-import { IconType } from 'react-icons';
 
 type Props = {
-  text?: string;
   wFull?: boolean;
   onClick?: () => void;
   type?: 'submit' | 'button' | 'reset';
-  icon?: IconType;
+  children: JSX.Element | string;
 };
 
 export const Button = ({
-  text,
   wFull,
   onClick,
   type = 'button',
-  icon: Icon,
+  children,
 }: Props) => (
   <button
     onClick={onClick}
     type={type}
     className={clsx(
-      'h-10 text-black text-sm sm:text-base font-bold p-2 rounded-md bg-blue hover:bg-cayn transition-colors grid place-items-center',
+      'h-10 text-black text-sm lg:text-base font-bold rounded-md bg-blue hover:bg-cayn transition-colors grid place-items-center',
       {
         'w-full': wFull,
         'w-32 sm:w-40': !wFull,
       }
     )}
   >
-    {Icon && <Icon className="w-4 h-4" />}
-    {text}
+    {children}
   </button>
 );

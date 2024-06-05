@@ -8,7 +8,7 @@ import { ButtonSkeleton } from './Skeletons/ButtonSkeleton';
 
 type Props = {
   products: Products[] | [];
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 const INITIAL_VISIBLE_PRODUCTS = 8;
@@ -26,17 +26,20 @@ export const ProductsList = memo(({ products, isLoading }: Props) => {
 
   return (
     <div className="w-full flex flex-col items-center gap-5">
-      <ul className="grid-container">
-        {isLoading &&
-          [...Array(INITIAL_VISIBLE_PRODUCTS)].map((_, i) => (
+      {isLoading && (
+        <ul className="grid-container">
+          {[...Array(INITIAL_VISIBLE_PRODUCTS)].map((_, i) => (
             <li key={i}>
               <ProductCardSkeleton />
             </li>
           ))}
+        </ul>
+      )}
 
-        <AnimatePresence initial={false}>
-          {products.length > 0 &&
-            products.slice(0, visibleProducts).map((product) => (
+      <AnimatePresence initial={false}>
+        {products.length > 0 && (
+          <ul className="grid-container">
+            {products.slice(0, visibleProducts).map((product) => (
               <m.li
                 layout
                 initial={{ opacity: 0, height: 0 }}
@@ -48,19 +51,26 @@ export const ProductsList = memo(({ products, isLoading }: Props) => {
                 <ProductCard product={product} />
               </m.li>
             ))}
-        </AnimatePresence>
-      </ul>
+          </ul>
+        )}
 
-      {products.length === 0 && !isLoading && (
-        <div className="big-title text-black uppercase py-40">
-          list is empty
-        </div>
-      )}
+        {products.length === 0 && !isLoading && (
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="text-center big-title text-black uppercase py-40"
+          >
+            list is empty
+          </m.div>
+        )}
+      </AnimatePresence>
 
       {isLoading && <ButtonSkeleton />}
 
       {visibleProducts < products.length && (
-        <Button text="See More" onClick={handleIncreaseVisibleProducts} />
+        <Button onClick={handleIncreaseVisibleProducts}>See More</Button>
       )}
     </div>
   );

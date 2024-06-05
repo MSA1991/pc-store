@@ -14,13 +14,13 @@
   }
 
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
     background-color: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: #8085ff;
-    border-radius: 6px;
+    border-radius: 5px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -82,7 +82,7 @@
 }
 
 .grid-container {
-  @apply w-full grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-5;
+  @apply w-full grid grid-cols-2 md:grid-cols-4 gap-5;
 }
 
 .big-title {

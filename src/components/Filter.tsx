@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { motion as m } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { setFilters } from '../redux/filterSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { setFilters } from '../store/filterSlice';
 import { Checkbox } from './UI/Checkbox';
 import { Button } from './UI/Button';
 import { Select } from './UI/Select';
@@ -96,7 +96,9 @@ export const Filter = () => {
           />
         </div>
 
-        <Button text="Apply" type="submit" wFull />
+        <Button type="submit" wFull>
+          Apply
+        </Button>
       </form>
     </m.div>
   );

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { clsx } from 'clsx';
-import { useGetCategoriesQuery } from '../redux/storeApi';
+import { useGetCategoriesQuery } from '../store/storeApi';
 import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
 import { FAQLink } from './FAQLink';
 

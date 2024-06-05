@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Pagination, A11y, Parallax } from 'swiper/modules';
 
-import { useGetCategoriesQuery } from '../redux/storeApi';
+import { useGetCategoriesQuery } from '../store/storeApi';
 import { SliderDirection } from '../types/SliderDirection';
 import { SliderButton } from './UI/SliderButton';
 import { CategorySingleSlide } from './CategorySingleSlide';
@@ -28,7 +28,7 @@ export const CategorySlider = () => {
 
       {data && (
         <article className="dark-item flex gap-5 items-center p-5">
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SliderButton
               direction={SliderDirection.Prev}
               handleSlideChange={handleSlideChange}
@@ -62,7 +62,7 @@ export const CategorySlider = () => {
             ></div>
           </Swiper>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SliderButton
               direction={SliderDirection.Next}
               handleSlideChange={handleSlideChange}

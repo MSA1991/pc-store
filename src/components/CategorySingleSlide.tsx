@@ -27,11 +27,12 @@ export const CategorySingleSlide = ({ category }: Props) => {
           {description}
         </p>
         <Link
+          className="w-min"
           to={`categories/${id}`}
           data-swiper-parallax-x="-500"
           data-swiper-parallax-duration="900"
         >
-          <Button text="See More" />
+          <Button>See More</Button>
         </Link>
       </div>
 

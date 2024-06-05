@@ -8,8 +8,8 @@ import {
 import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { auth } from '../firebase';
 import { Button } from './UI/Button';
-import { useAppDispatch } from '../redux/hooks';
-import { setUserPhoto } from '../redux/userSlice';
+import { useAppDispatch } from '../store/hooks';
+import { setUserPhoto } from '../store/userSlice';
 
 export const LogInWithSocialMedia = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +19,19 @@ export const LogInWithSocialMedia = () => {
     const provider = new GoogleAuthProvider();
 
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+
+      const user = userCredential.user;
+      const userPhoto = user.photoURL;
+
+      if (userPhoto) {
+        const newUserPhoto = userPhoto.replace(/=[^=]*$/, '=s500-c');
+
+        await updateProfile(user, { photoURL: newUserPhoto });
+
+        dispatch(setUserPhoto(newUserPhoto));
+      }
+
       navigate('/home');
     } catch (error) {
       console.log(error);
@@ -30,11 +42,12 @@ export const LogInWithSocialMedia = () => {
     const provider = new FacebookAuthProvider();
 
     try {
-      const response = await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
 
-      const user = response.user;
+      const user = userCredential.user;
 
-      const credential = FacebookAuthProvider.credentialFromResult(response);
+      const credential =
+        FacebookAuthProvider.credentialFromResult(userCredential);
 
       const accessToken = credential?.accessToken;
       const userPhoto = user.photoURL;
@@ -51,8 +64,12 @@ export const LogInWithSocialMedia = () => {
 
   return (
     <div className="w-full flex gap-5">
-      <Button icon={FaGoogle} wFull onClick={handleLogInWithGoogle} />
-      <Button icon={FaFacebookF} wFull onClick={handleLogInWithFacebook} />
+      <Button wFull onClick={handleLogInWithGoogle}>
+        <FaGoogle />
+      </Button>
+      <Button wFull onClick={handleLogInWithFacebook}>
+        <FaFacebookF />
+      </Button>
     </div>
   );
 };

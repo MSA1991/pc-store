@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useGetProductsQuery } from '../redux/storeApi';
+import { useGetProductsQuery } from '../store/storeApi';
 import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -34,7 +34,7 @@ export const SearchedProducts = ({ query }: Props) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 10 }}
       transition={{ duration: 0.3 }}
-      className="max-w-[444px] max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray ring-2 ring-light-gray z-20"
+      className="max-w-md max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray border-2 border-light-gray z-20"
     >
       {isLoading && <SearchedProductsSkeleton />}
 
@@ -45,7 +45,7 @@ export const SearchedProducts = ({ query }: Props) => {
               <li key={id}>
                 <Link
                   to={`categories/${categoryId}/${id}`}
-                  className="flex gap-2 sm:gap-5 rounded-md overflow-hidden hover-border bg-black"
+                  className="flex gap-2 sm:gap-5 dark-item overflow-hidden hover-border"
                 >
                   <div className="w-28 aspect-square">
                     <LazyLoadImage

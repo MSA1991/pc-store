@@ -6,15 +6,15 @@ import { Logo } from './Logo';
 const socialMediaLinks = [
   {
     url: 'https://www.facebook.com/',
-    icon: <FaFacebook className="icon" />,
+    icon: FaFacebook,
   },
   {
     url: 'https://www.instagram.com',
-    icon: <FaInstagram className="icon" />,
+    icon: FaInstagram,
   },
   {
     url: 'https://twitter.com/',
-    icon: <FaTwitter className="icon" />,
+    icon: FaTwitter,
   },
 ];
 
@@ -34,11 +34,11 @@ export const Footer = () => {
         </a>
       </div>
 
-      <ul className="flex gap-2 sm:gap-5 justify-self-end">
-        {socialMediaLinks.map(({ url, icon }) => (
-          <li key={url}>
+      <ul className="flex gap-2 justify-self-end">
+        {socialMediaLinks.map(({ url, icon: Icon }) => (
+          <li key={url} className="p-1">
             <a href={url} target="_blank">
-              {icon}
+              <Icon className="icon" />
             </a>
           </li>
         ))}

@@ -1,14 +1,15 @@
 import { motion as m, AnimatePresence } from 'framer-motion';
+import { IconType } from 'react-icons';
 
 type Props = {
-  children: JSX.Element;
+  icon: IconType;
   quantity?: number;
 };
 
-export const NotificationIcon = ({ children, quantity }: Props) => {
+export const NotificationIcon = ({ icon: Icon, quantity }: Props) => {
   return (
     <div className="relative">
-      {children}
+      <Icon className="icon" />
 
       <AnimatePresence>
         {quantity && (

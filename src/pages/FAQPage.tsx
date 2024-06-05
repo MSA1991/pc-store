@@ -3,7 +3,7 @@ import { AnimatedPage } from './AnimatedPage';
 import { faq } from '../data/faq';
 import { Accordion } from '../components/UI/Accordion';
 
-export const FAQ = () => {
+export const FAQPage = () => {
   const [openQuestionId, setOpenQuestionId] = useState<number | null>(null);
 
   const handleChangeOpenQuestion = (id: number) => {

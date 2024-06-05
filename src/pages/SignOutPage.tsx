@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { deleteUser, signOut } from 'firebase/auth';
 import { deleteObject, ref } from 'firebase/storage';
+import { remove, ref as refDB } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { removeUser } from '../redux/userSlice';
+import { useAppSelector } from '../store/hooks';
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
-import { auth, storage } from '../firebase';
+import { auth, database, storage } from '../firebase';
 import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
 import { Or } from '../components/Or';
 
-export const SignOut = () => {
+export const SignOutPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const user = useAppSelector(({ user }) => user.currentUser);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!user) {
@@ -31,7 +30,6 @@ export const SignOut = () => {
       setIsLoading(true);
       await signOut(auth);
 
-      dispatch(removeUser());
       navigate('/home');
     } catch (error) {
       console.log(error);
@@ -47,19 +45,21 @@ export const SignOut = () => {
 
       if (!user) return;
 
+      const userId = user.uid;
       const isPasswordProvider = user.providerData[0].providerId === 'password';
 
       if (user.photoURL && isPasswordProvider) {
-        const photoId = user.uid;
         const formatPhoto = user.photoURL.includes('jpeg') ? 'jpeg' : 'png';
-        const storageRef = ref(storage, `images/${photoId}.${formatPhoto}`);
+        const storageRef = ref(storage, `images/${userId}.${formatPhoto}`);
 
         await deleteObject(storageRef);
       }
 
+      const userRef = refDB(database, `users/${userId}`);
+      await remove(userRef);
+
       await deleteUser(user);
 
-      dispatch(removeUser());
       navigate('/home');
     } catch (error) {
       console.log(error);
@@ -92,7 +92,7 @@ export const SignOut = () => {
               {isLoading ? (
                 <ButtonSkeleton />
               ) : (
-                <Button text="Sign Out" onClick={handleSignOut} />
+                <Button onClick={handleSignOut}>Sign Out</Button>
               )}
 
               <Or />
@@ -100,7 +100,7 @@ export const SignOut = () => {
               {isLoading ? (
                 <ButtonSkeleton />
               ) : (
-                <Button text="Delete User" onClick={handleDeleteUser} />
+                <Button onClick={handleDeleteUser}>Delete User</Button>
               )}
             </div>
           </div>

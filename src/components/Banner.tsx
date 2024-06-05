@@ -20,7 +20,7 @@ export const Banner = () => {
           </p>
 
           <Link to="big-sale">
-            <Button text="See More" />
+            <Button>See More</Button>
           </Link>
         </div>
       </div>

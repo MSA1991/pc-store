@@ -4,7 +4,7 @@ const NUMBER_OF_IMG = 3;
 const NUMBER_OF_SPEC = 5;
 
 export const ProductSkeleton = () => (
-  <div className="flex flex-col md:flex-row gap-5">
+  <div className="flex flex-col md:flex-row gap-5 mb-5">
     <div className="flex flex-col gap-2 sm:gap-5 w-full md:w-2/5">
       <div className="aspect-square dark-item animation-skeleton"></div>
 
@@ -40,7 +40,7 @@ export const ProductSkeleton = () => (
         </div>
       </div>
 
-      <div className="flex gap-5 mb-12">
+      <div className="flex flex-row gap-5">
         <ButtonSkeleton wFull />
         <ButtonSkeleton wFull />
       </div>

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { ProductsList } from '../components/ProductsList';
-import { useGetProductsQuery } from '../redux/storeApi';
+import { useGetProductsQuery } from '../store/storeApi';
 import { AnimatedPage } from './AnimatedPage';
 
-export const BigSale = () => {
+export const BigSalePage = () => {
   const { data, isLoading } = useGetProductsQuery();
 
   const discountedProducts = useMemo(() => {

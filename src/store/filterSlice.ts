@@ -17,11 +17,12 @@ const filterSlice = createSlice({
     setFilters: (_, { payload }: PayloadAction<ProductsFilter>) => {
       return payload;
     },
-    setMinPriceInCategory: (state, { payload }: PayloadAction<number>) => {
-      state.minPriceInCategory = payload;
-    },
-    setMaxPriceInCategory: (state, { payload }: PayloadAction<number>) => {
-      state.maxPriceInCategory = payload;
+    setRangePriceInCategory: (
+      state,
+      { payload }: PayloadAction<{ min: number; max: number }>
+    ) => {
+      state.minPriceInCategory = payload.min;
+      state.maxPriceInCategory = payload.max;
     },
     clearFilter: () => {
       return initialState;
@@ -29,11 +30,7 @@ const filterSlice = createSlice({
   },
 });
 
-export const {
-  setFilters,
-  setMinPriceInCategory,
-  setMaxPriceInCategory,
-  clearFilter,
-} = filterSlice.actions;
+export const { setFilters, setRangePriceInCategory, clearFilter } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;

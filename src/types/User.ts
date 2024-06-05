@@ -1,13 +1,14 @@
-import { Products } from './Products';
+import { CartProducts, Products } from './Products';
 
 export type User = {
   name: string;
   email: string;
+  id: string;
   photo: string | null;
 };
 
 export type UserState = {
   currentUser: User | null;
-  favorite: Products[];
-  cart: Products[];
+  favorites: Products[];
+  cart: CartProducts[];
 };

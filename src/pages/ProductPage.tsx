@@ -3,45 +3,55 @@ import { useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { AnimatedPage } from './AnimatedPage';
-import { useGetProductQuery, useGetProductsQuery } from '../redux/storeApi';
-import { Button } from '../components/UI/Button';
+import { useGetProductQuery, useGetProductsQuery } from '../store/storeApi';
 import { Price } from '../components/Price';
 import { RatingStars } from '../components/UI/RatingStars';
 import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
 import { RelatedProducts } from '../components/RelatedProducts';
+import { UserActionButtons } from '../components/UserActionButtons';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-export const Product = () => {
+export const ProductPage = () => {
   const { products = '', product = '' } = useParams();
-  const { data: productsList, isLoading: isLoadingProducts } =
+  const { data: dataProductsList, isLoading: isLoadingProducts } =
     useGetProductsQuery();
-  const { data, isLoading } = useGetProductQuery({ products, product });
+  const { data: dataProduct, isLoading: isLoadingProduct } = useGetProductQuery(
+    {
+      products,
+      product,
+    }
+  );
+
   const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
-    setCurrentImage(data?.images[0] || '');
-  }, [data]);
+    setCurrentImage(dataProduct?.images[0] || '');
+  }, [dataProduct]);
 
   const handleChangeCurrentImage = (img: string) => {
     setCurrentImage(img);
   };
 
   const relatedProducts = useMemo(() => {
-    if (!productsList) return [];
+    if (!dataProductsList) return [];
 
-    return productsList.filter(
+    return dataProductsList.filter(
       ({ categoryId, id }) => categoryId === products && id !== product
     );
-  }, [productsList, products, product]);
+  }, [dataProductsList, products, product]);
+
+  const currentProduct = useMemo(() => {
+    return dataProductsList?.find(({ id }) => dataProduct?.id === id);
+  }, [dataProductsList, dataProduct]);
 
   return (
     <AnimatedPage>
       <div className="flex flex-col gap-5">
-        {isLoading && <ProductSkeleton />}
+        {isLoadingProduct && <ProductSkeleton />}
 
-        {data && (
-          <div className="flex flex-col md:flex-row gap-5">
+        {dataProduct && (
+          <div className="flex flex-col md:flex-row gap-5 mb-5">
             <div className="flex flex-col gap-2 sm:gap-5 w-full md:w-2/5">
               <AnimatePresence mode="wait">
                 <m.div
@@ -64,7 +74,7 @@ export const Product = () => {
               </AnimatePresence>
 
               <ul className="grid grid-cols-3 gap-2 sm:gap-5">
-                {data.images.map((img, i) => (
+                {dataProduct.images.map((img, i) => (
                   <li
                     key={i}
                     className="cursor-pointer hover-border rounded-md overflow-hidden"
@@ -84,17 +94,20 @@ export const Product = () => {
             </div>
 
             <div className="flex flex-col gap-2 w-full md:w-3/5">
-              <h2 className="section-title">{data.title}</h2>
+              <h2 className="section-title">{dataProduct.title}</h2>
 
-              <Price price={data.price} discount={data.discount} />
+              <Price
+                price={dataProduct.price}
+                discount={dataProduct.discount}
+              />
 
               <div className="flex items-center gap-2">
-                {data.rating.toFixed(1)}
+                {dataProduct.rating.toFixed(1)}
 
-                <RatingStars rating={data.rating} />
+                <RatingStars rating={dataProduct.rating} />
 
                 <span className="text-light-gray">
-                  ({data.reviews} ratings)
+                  ({dataProduct.reviews} ratings)
                 </span>
               </div>
 
@@ -104,20 +117,22 @@ export const Product = () => {
                 </h3>
 
                 <ul className="flex flex-col gap-2 mt-2">
-                  {Object.entries(data.specifications).map(([spec, value]) => (
-                    <li key={spec} className="flex gap-1 text-sm lg:text-base">
-                      <div>{spec}</div>
-                      <div className="w-4 grow border-b-2 border-light-gray border-dotted -translate-y-1"></div>
-                      <div className="text-end">{value}</div>
-                    </li>
-                  ))}
+                  {Object.entries(dataProduct.specifications).map(
+                    ([spec, value]) => (
+                      <li
+                        key={spec}
+                        className="flex gap-1 text-sm lg:text-base"
+                      >
+                        <div>{spec}</div>
+                        <div className="w-4 grow border-b-2 border-light-gray border-dotted -translate-y-1"></div>
+                        <div className="text-end">{value}</div>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
 
-              <div className="flex gap-5">
-                <Button text="Add to Cart" wFull />
-                <Button text="Add to Favorite" wFull />
-              </div>
+              {currentProduct && <UserActionButtons product={currentProduct} />}
             </div>
           </div>
         )}

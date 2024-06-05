@@ -18,7 +18,7 @@ import { LogInForm } from '../types/Forms';
 import { Or } from '../components/Or';
 import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
 
-export const LogIn = () => {
+export const LogInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -138,7 +138,9 @@ export const LogIn = () => {
           {isLoading ? (
             <ButtonSkeleton wFull />
           ) : (
-            <Button text="Log In" wFull type="submit" />
+            <Button wFull type="submit">
+              Log In
+            </Button>
           )}
 
           <Or />

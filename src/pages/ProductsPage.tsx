@@ -2,16 +2,12 @@ import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { AnimatedPage } from './AnimatedPage';
 import { ProductsList } from '../components/ProductsList';
-import { filterProducts } from '../utils/filterProducts';
-import { useGetCategoriesQuery, useGetProductsQuery } from '../redux/storeApi';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import {
-  clearFilter,
-  setMaxPriceInCategory,
-  setMinPriceInCategory,
-} from '../redux/filterSlice';
+import { getFilteredProducts } from '../utils/filterProducts';
+import { useGetCategoriesQuery, useGetProductsQuery } from '../store/storeApi';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { clearFilter, setRangePriceInCategory } from '../store/filterSlice';
 
-export const Products = () => {
+export const ProductsPage = () => {
   const { products } = useParams();
   const { data: productList, isLoading } = useGetProductsQuery();
   const { data: categories } = useGetCategoriesQuery();
@@ -34,8 +30,12 @@ export const Products = () => {
     const maxPriceInCategory = Math.max(...pricesArr);
 
     dispatch(clearFilter());
-    dispatch(setMinPriceInCategory(minPriceInCategory));
-    dispatch(setMaxPriceInCategory(maxPriceInCategory));
+    dispatch(
+      setRangePriceInCategory({
+        min: minPriceInCategory,
+        max: maxPriceInCategory,
+      })
+    );
   }, [categoryProducts, dispatch]);
 
   const categoryName = useMemo(
@@ -46,7 +46,7 @@ export const Products = () => {
   const filteredProducts = useMemo(() => {
     if (!categoryProducts) return [];
 
-    return filterProducts(categoryProducts, filter);
+    return getFilteredProducts(categoryProducts, filter);
   }, [categoryProducts, filter]);
 
   return (

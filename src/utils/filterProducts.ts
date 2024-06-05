@@ -1,7 +1,7 @@
 import { Products } from '../types/Products';
 import { ProductsFilter, SortingOptions } from '../types/ProductsFilter';
 
-export const filterProducts = (
+export const getFilteredProducts = (
   products: Products[],
   filter: ProductsFilter
 ) => {

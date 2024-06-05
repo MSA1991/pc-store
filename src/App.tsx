@@ -1,41 +1,90 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { NotFound } from './pages/NotFound';
+import { useCallback, useEffect, useRef } from 'react';
+import { get, ref, set } from 'firebase/database';
+import { auth, database } from './firebase';
+import { deleteUser, setCart, setFavorites, setUser } from './store/userSlice';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { MainLayout } from './layouts/MainLayout';
-import { Home } from './pages/Home';
-import { Products } from './pages/Products';
-import { FAQ } from './pages/FAQ';
-import { Product } from './pages/Product';
-import { BigSale } from './pages/BigSale';
-import { LogIn } from './pages/LogIn';
-import { SignUp } from './pages/SignUp';
+import { AppRoutes } from './Routes/AppRoutes';
+import { useDebounce } from './hooks/useDebounce';
+import { CartProducts, Products } from './types/Products';
 
-import { SignOut } from './pages/SignOut';
-import { auth } from './firebase';
-import { useEffect } from 'react';
-import { useAppDispatch } from './redux/hooks';
-import { setUser } from './redux/userSlice';
+const DB_UPDATE_DELAY = 300;
 
 function App() {
-  const location = useLocation();
+  const user = useAppSelector(({ user }) => user.currentUser);
+  const cart = useAppSelector(({ user }) => user.cart);
+  const favorites = useAppSelector(({ user }) => user.favorites);
+  const debouncedCart = useDebounce(cart, DB_UPDATE_DELAY);
+  const debouncedFavorites = useDebounce(favorites, DB_UPDATE_DELAY);
+
   const dispatch = useAppDispatch();
+  const isFirstChange = useRef(true);
+
+  const updateUserData = useCallback(
+    async (title: 'cart' | 'favorites', data: CartProducts[] | Products[]) => {
+      try {
+        await set(ref(database, `users/${user?.id}/${title}`), data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [user]
+  );
 
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged((user) => {
-      if (user) {
-        const { displayName, email, photoURL } = user;
+    if (isFirstChange.current || !user) return;
 
-        if (!displayName || !email) {
-          return;
+    updateUserData('cart', cart);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedCart]);
+
+  useEffect(() => {
+    if (isFirstChange.current || !user) return;
+
+    updateUserData('favorites', favorites);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedFavorites]);
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        dispatch(deleteUser());
+        return;
+      }
+
+      const { displayName, email, photoURL, uid } = user;
+
+      if (!displayName || !email) {
+        return;
+      }
+
+      dispatch(
+        setUser({
+          name: displayName,
+          photo: photoURL,
+          id: uid,
+          email,
+        })
+      );
+
+      try {
+        const snapshotFavorites = await get(
+          ref(database, `users/${user.uid}/favorites`)
+        );
+
+        const snapshotCart = await get(ref(database, `users/${user.uid}/cart`));
+
+        if (snapshotCart.val()) {
+          dispatch(setCart(snapshotCart.val()));
         }
 
-        dispatch(
-          setUser({
-            name: displayName,
-            email,
-            photo: photoURL,
-          })
-        );
+        if (snapshotFavorites.val()) {
+          dispatch(setFavorites(snapshotFavorites.val()));
+        }
+
+        isFirstChange.current = false;
+      } catch (error) {
+        console.log(error);
       }
     });
 
@@ -45,22 +94,7 @@ function App() {
 
   return (
     <MainLayout>
-      <AnimatePresence mode="wait" initial={false}>
-        <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="categories">
-            <Route path=":products" element={<Products />} />
-            <Route path=":products/:product" element={<Product />} />
-          </Route>
-          <Route path="big-sale" element={<BigSale />} />
-          <Route path="faq" element={<FAQ />} />
-          <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="signout" element={<SignOut />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AnimatePresence>
+      <AppRoutes />
     </MainLayout>
   );
 }

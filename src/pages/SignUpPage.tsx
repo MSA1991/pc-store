@@ -12,12 +12,12 @@ import { SignUpForm } from '../types/Forms';
 import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
 import { Or } from '../components/Or';
 import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
-import { useAppDispatch } from '../redux/hooks';
-import { setUser } from '../redux/userSlice';
+import { useAppDispatch } from '../store/hooks';
+import { setUser } from '../store/userSlice';
 
 const MAX_PHOTO_SIZE_KB = 300;
 
-export const SignUp = () => {
+export const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -54,12 +54,12 @@ export const SignUp = () => {
       );
 
       const user = credential.user;
+      const userId = user.uid;
       let photoURL = null;
 
       if (userPhoto) {
-        const photoId = user.uid;
         const formatPhoto = userPhoto.type.split('/').at(-1);
-        const storageRef = ref(storage, `images/${photoId}.${formatPhoto}`);
+        const storageRef = ref(storage, `images/${userId}.${formatPhoto}`);
 
         await uploadBytes(storageRef, userPhoto);
         photoURL = await getDownloadURL(storageRef);
@@ -67,7 +67,14 @@ export const SignUp = () => {
 
       await updateProfile(user, { displayName: userName, photoURL });
 
-      dispatch(setUser({ name: userName, email: userEmail, photo: photoURL }));
+      dispatch(
+        setUser({
+          name: userName,
+          email: userEmail,
+          photo: photoURL,
+          id: userId,
+        })
+      );
       navigate('/home');
     } catch (error) {
       console.error(error);
@@ -222,7 +229,9 @@ export const SignUp = () => {
           {isLoading ? (
             <ButtonSkeleton wFull />
           ) : (
-            <Button text="Sign Up" type="submit" wFull />
+            <Button type="submit" wFull>
+              Sign Up
+            </Button>
           )}
           <Or />
 
