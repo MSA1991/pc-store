@@ -30,9 +30,9 @@ export const SearchedProducts = ({ query }: Props) => {
 
   return (
     <m.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: -150, scale: 0 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -150, scale: 0 }}
       transition={{ duration: 0.3 }}
       className="max-w-md max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray border-2 border-light-gray z-20"
     >

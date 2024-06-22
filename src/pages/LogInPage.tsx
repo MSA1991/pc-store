@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { CgProfile } from 'react-icons/cg';
+import { toast } from 'react-toastify';
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
@@ -51,7 +52,7 @@ export const LogInPage = () => {
       await signInWithEmailAndPassword(auth, userEmail, userPassword);
       navigate('/home');
     } catch (error) {
-      console.log(error);
+      toast('Error logging into the account');
       reset();
     } finally {
       setIsLoading(false);

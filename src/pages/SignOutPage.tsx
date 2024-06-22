@@ -4,6 +4,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { remove, ref as refDB } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
+import { toast } from 'react-toastify';
 import { useAppSelector } from '../store/hooks';
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
@@ -32,7 +33,7 @@ export const SignOutPage = () => {
 
       navigate('/home');
     } catch (error) {
-      console.log(error);
+      toast('Error logging out of the account');
     } finally {
       setIsLoading(false);
     }
@@ -59,10 +60,9 @@ export const SignOutPage = () => {
       await remove(userRef);
 
       await deleteUser(user);
-
       navigate('/home');
     } catch (error) {
-      console.log(error);
+      toast('Error deleting account');
     } finally {
       setIsLoading(false);
     }

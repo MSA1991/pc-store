@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { toast } from 'react-toastify';
 import { AnimatedPage } from './AnimatedPage';
 import { useGetProductQuery, useGetProductsQuery } from '../store/storeApi';
 import { Price } from '../components/Price';
@@ -16,14 +17,25 @@ export const ProductPage = () => {
   const { products = '', product = '' } = useParams();
   const { data: dataProductsList, isLoading: isLoadingProducts } =
     useGetProductsQuery();
-  const { data: dataProduct, isLoading: isLoadingProduct } = useGetProductQuery(
-    {
-      products,
-      product,
-    }
-  );
+  const {
+    data: dataProduct,
+    isLoading: isLoadingProduct,
+    error: errorProduct,
+  } = useGetProductQuery({
+    products,
+    product,
+  });
 
   const [currentImage, setCurrentImage] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (errorProduct) {
+      toast('Product not found');
+      navigate('/error');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorProduct]);
 
   useEffect(() => {
     setCurrentImage(dataProduct?.images[0] || '');

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { toast } from 'react-toastify';
 import { auth, storage } from '../firebase';
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
@@ -75,9 +76,10 @@ export const SignUpPage = () => {
           id: userId,
         })
       );
+
       navigate('/home');
     } catch (error) {
-      console.error(error);
+      toast('Error while creating account');
       reset();
     } finally {
       setIsLoading(false);

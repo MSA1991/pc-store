@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { toast } from 'react-toastify';
 import { Products } from '../types/Products';
 import { Price } from './Price';
-
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import { FavoriteIcon } from './Icon/FavoriteIcon';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { toggleProductInFavorites } from '../store/userSlice';
+
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 type Props = {
   product: Products;
@@ -25,7 +26,11 @@ export const ProductCard = ({ product }: Props) => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    if (!user) return;
+
+    if (!user) {
+      toast('Log in to your account');
+      return;
+    }
 
     dispatch(toggleProductInFavorites(product));
   };

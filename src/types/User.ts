@@ -12,3 +12,8 @@ export type UserState = {
   favorites: Products[];
   cart: CartProducts[];
 };
+
+export type UserDataTitle = 'cart' | 'favorites';
+export type UserData<T extends UserDataTitle> = T extends 'cart'
+  ? CartProducts[]
+  : Products[];

@@ -11,10 +11,10 @@ export const Categories = () => {
     <div className="section-fixed-padding flex flex-col justify-between h-96">
       <h3 className="section-title">Categories</h3>
 
-      <nav>
-        {isLoading && <CategoriesSkeleton />}
+      {isLoading && <CategoriesSkeleton />}
 
-        {data && (
+      {data && data.length > 0 && (
+        <nav>
           <ul className="flex flex-col gap-2">
             {data.map(({ id, name }) => (
               <li key={id}>
@@ -31,8 +31,14 @@ export const Categories = () => {
               </li>
             ))}
           </ul>
-        )}
-      </nav>
+        </nav>
+      )}
+
+      {(!data || data.length === 0) && !isLoading && (
+        <div className="text-center section-title text-black uppercase">
+          List is empty
+        </div>
+      )}
 
       <FAQLink />
     </div>

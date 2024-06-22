@@ -33,7 +33,7 @@ export const Header = () => {
         <Logo />
       </div>
 
-      <div className="h-full lg:hidden">
+      <div className="block lg:hidden">
         <BurgerButton isOpen={isOpenMenu} onToggle={toggleMenu} />
       </div>
 
@@ -44,7 +44,9 @@ export const Header = () => {
         placeholder="Search..."
       />
 
-      <UserActionIcons />
+      <div className="justify-self-end">
+        <UserActionIcons />
+      </div>
 
       <AnimatePresence>
         {deferredQuery.trim() && <SearchedProducts query={deferredQuery} />}

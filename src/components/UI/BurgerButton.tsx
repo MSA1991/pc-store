@@ -15,23 +15,25 @@ export const BurgerButton = ({ isOpen, onToggle }: Props) => (
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       onClick={onToggle}
-      className="relative h-4 w-6 z-50"
+      className="w-6 h-6 grid place-items-center"
     >
-      <motion.span
-        variants={VARIANTS.top}
-        className="absolute top-0 left-0 h-1 w-full bg-white rounded-full"
-        style={{ y: '-50%' }}
-      />
-      <motion.span
-        variants={VARIANTS.middle}
-        className="absolute top-1/2 left-0 h-1 w-full bg-white rounded-full"
-        style={{ y: '-50%' }}
-      />
-      <motion.span
-        variants={VARIANTS.bottom}
-        className="absolute bottom-0 left-0 h-1 w-1/2 bg-white rounded-full"
-        style={{ y: '50%' }}
-      />
+      <div className="relative w-6 h-4 z-50">
+        <motion.span
+          variants={VARIANTS.top}
+          className="absolute top-0 left-0 h-1 w-full bg-white rounded-full"
+          style={{ y: '-50%' }}
+        />
+        <motion.span
+          variants={VARIANTS.middle}
+          className="absolute top-1/2 left-0 h-1 w-full bg-white rounded-full"
+          style={{ y: '-50%' }}
+        />
+        <motion.span
+          variants={VARIANTS.bottom}
+          className="absolute bottom-0 left-0 h-1 w-1/2 bg-white rounded-full"
+          style={{ y: '50%' }}
+        />
+      </div>
     </motion.button>
   </MotionConfig>
 );

@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
+import { toast } from 'react-toastify';
 import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 import { auth } from '../firebase';
 import { Button } from './UI/Button';
@@ -34,7 +35,7 @@ export const LogInWithSocialMedia = () => {
 
       navigate('/home');
     } catch (error) {
-      console.log(error);
+      toast('Error logging into the account');
     }
   };
 
@@ -58,7 +59,7 @@ export const LogInWithSocialMedia = () => {
       dispatch(setUserPhoto(newUserPhoto));
       navigate('/home');
     } catch (error) {
-      console.log(error);
+      toast('Error logging into the account');
     }
   };
 

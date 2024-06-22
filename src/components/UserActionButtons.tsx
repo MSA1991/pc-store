@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   toggleProductInCart,
@@ -23,13 +24,19 @@ export const UserActionButtons = ({ product }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleToggleProductInFavorites = () => {
-    if (!user) return;
+    if (!user) {
+      toast('Log in to your account');
+      return;
+    }
 
     dispatch(toggleProductInFavorites(product));
   };
 
   const handleToggleProductInCart = () => {
-    if (!user) return;
+    if (!user) {
+      toast('Log in to your account');
+      return;
+    }
 
     dispatch(toggleProductInCart({ ...product, quantity: 1 }));
   };

@@ -46,7 +46,7 @@ export const SidebarMenu = ({ toggleMenu }: Props) => {
         animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
         exit={{ x: -300 }}
         transition={{ duration: 0.3 }}
-        className="absolute lg:hidden left-2 sm:left-5 z-30 flex items-center justify-end bg-black w-[248px] sm:w-[224px] h-[52px] sm:h-[76px] before:absolute before:-top-5 before:left-0 before:w-full before:h-5 before:bg-black"
+        className="absolute lg:hidden left-2 sm:left-5 z-30 flex items-center justify-end bg-black/80 backdrop-blur-sm w-[248px] sm:w-[224px] h-[52px] sm:h-[76px] before:absolute before:-top-5 before:left-0 before:w-full before:h-5 before:bg-black"
       >
         <div onClick={toggleMenu}>
           <Logo />

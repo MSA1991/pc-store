@@ -12,7 +12,7 @@ export const UserActionIcons = () => {
   const userPhoto = user?.photo || '';
 
   return (
-    <div className="flex items-center gap-2 justify-self-end">
+    <div className="flex items-center gap-2">
       <Link to="favorite" className="p-1">
         <NotificationIcon icon={GrFavorite} quantity={favorites.length} />
       </Link>
