@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { GrFavorite } from 'react-icons/gr';
 import { LuShoppingCart } from 'react-icons/lu';
 import { CgProfile } from 'react-icons/cg';
+
 import { NotificationIcon } from './UI/NotificationIcon';
 import { useAppSelector } from '../store/hooks';
 

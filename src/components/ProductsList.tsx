@@ -1,5 +1,6 @@
 import { memo, useState } from 'react';
 import { motion as m, AnimatePresence } from 'framer-motion';
+
 import { Products } from '../types/Products';
 import { ProductCardSkeleton } from './Skeletons/ProductCardSkeleton';
 import { Button } from './UI/Button';

@@ -3,20 +3,20 @@ import { ProductCard } from './ProductCard';
 import { ProductCardSkeleton } from './Skeletons/ProductCardSkeleton';
 
 type Props = {
-  text: string;
+  title: string;
   products: Products[];
   isLoading: boolean;
 };
 
 const NUMBER_OF_PRODUCTS = 4;
 
-export const RelatedProducts = ({ text, products, isLoading }: Props) => (
+export const RelatedProducts = ({ title, products, isLoading }: Props) => (
   <article className="p-2 sm:p-5 ring-2 ring-black ring-inset rounded-md">
-    <h3 className="section-title mb-5 text-center md:text-left">{text}</h3>
+    <h3 className="section-title mb-5 text-center md:text-left">{title}</h3>
 
     <ul className="grid-container">
       {isLoading &&
-        [...new Array(NUMBER_OF_PRODUCTS)].map((_, i) => (
+        [...Array(NUMBER_OF_PRODUCTS)].map((_, i) => (
           <li key={i}>
             <ProductCardSkeleton />
           </li>

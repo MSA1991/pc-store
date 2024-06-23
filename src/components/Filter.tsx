@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { motion as m } from 'framer-motion';
+
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setFilters } from '../store/filterSlice';
 import { Checkbox } from './UI/Checkbox';
@@ -15,7 +16,7 @@ import {
 const options: SortingOptions[] = Object.values(SortingOptions);
 
 export const Filter = () => {
-  const filter = useAppSelector(({ filter }) => filter);
+  const filter = useAppSelector((state) => state.filter);
   const { minPrice, maxPrice, minPriceInCategory, maxPriceInCategory } = filter;
 
   const [productsFilter, setProductsFilter] = useState<ProductsFilter>(filter);

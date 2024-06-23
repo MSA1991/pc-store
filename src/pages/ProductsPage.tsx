@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { AnimatedPage } from './AnimatedPage';
 import { ProductsList } from '../components/ProductsList';
 import { getFilteredProducts } from '../utils/filterProducts';

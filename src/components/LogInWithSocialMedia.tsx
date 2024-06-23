@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
-import { toast } from 'react-toastify';
-import { FaGoogle, FaFacebookF } from 'react-icons/fa';
+
 import { auth } from '../firebase';
 import { Button } from './UI/Button';
 import { useAppDispatch } from '../store/hooks';

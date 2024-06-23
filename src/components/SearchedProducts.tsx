@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
-import { useGetProductsQuery } from '../store/storeApi';
 import { Link } from 'react-router-dom';
 import { motion as m } from 'framer-motion';
+import { useGetProductsQuery } from '../store/storeApi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Highlighter from 'react-highlight-words';
+
 import { Price } from './Price';
 import { SearchedProductsSkeleton } from './Skeletons/SearchedProductsSkeleton';
 

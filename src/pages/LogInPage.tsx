@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import { CgProfile } from 'react-icons/cg';
+import { toast } from 'react-toastify';
 import {
   browserLocalPersistence,
   browserSessionPersistence,
   setPersistence,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { CgProfile } from 'react-icons/cg';
-import { toast } from 'react-toastify';
-import { AnimatedPage } from './AnimatedPage';
+
+import { auth } from '../firebase';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { Checkbox } from '../components/UI/Checkbox';
-import { auth } from '../firebase';
-import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
-import { LogInForm } from '../types/Forms';
-import { Or } from '../components/Or';
 import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
+import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
+import { AnimatedPage } from './AnimatedPage';
+import { Or } from '../components/Or';
+import { LogInForm } from '../types/Forms';
 
 export const LogInPage = () => {
   const [isLoading, setIsLoading] = useState(false);

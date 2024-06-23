@@ -3,13 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { motion as m, AnimatePresence } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { toast } from 'react-toastify';
-import { AnimatedPage } from './AnimatedPage';
-import { useGetProductQuery, useGetProductsQuery } from '../store/storeApi';
+
 import { Price } from '../components/Price';
 import { RatingStars } from '../components/UI/RatingStars';
 import { ProductSkeleton } from '../components/Skeletons/ProductSkeleton';
 import { RelatedProducts } from '../components/RelatedProducts';
 import { UserActionButtons } from '../components/UserActionButtons';
+import { AnimatedPage } from './AnimatedPage';
+import { useGetProductQuery, useGetProductsQuery } from '../store/storeApi';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -150,7 +151,7 @@ export const ProductPage = () => {
         )}
 
         <RelatedProducts
-          text="Related products"
+          title="Related products"
           isLoading={isLoadingProducts}
           products={relatedProducts}
         />

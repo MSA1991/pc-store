@@ -4,17 +4,18 @@ import { useForm, Controller } from 'react-hook-form';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { toast } from 'react-toastify';
-import { auth, storage } from '../firebase';
+
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
 import { Input } from '../components/UI/Input';
 import { PhotoUploader } from '../components/UI/PhotoUploader';
-import { SignUpForm } from '../types/Forms';
 import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
 import { Or } from '../components/Or';
 import { LogInWithSocialMedia } from '../components/LogInWithSocialMedia';
 import { useAppDispatch } from '../store/hooks';
 import { setUser } from '../store/userSlice';
+import { auth, storage } from '../firebase';
+import { SignUpForm } from '../types/Forms';
 
 const MAX_PHOTO_SIZE_KB = 300;
 

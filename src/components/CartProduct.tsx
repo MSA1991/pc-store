@@ -2,8 +2,9 @@ import { memo } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci';
 import { MdDeleteOutline } from 'react-icons/md';
-import { CartProducts } from '../types/Products';
+
 import { Price } from './Price';
+import { CartProducts } from '../types/Products';
 import { useAppDispatch } from '../store/hooks';
 import {
   decreaseQuantityProductInCart,

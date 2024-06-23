@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { clsx } from 'clsx';
+
 import { useGetCategoriesQuery } from '../store/storeApi';
 import { CategoriesSkeleton } from './Skeletons/CategoriesSkeleton';
-import { FAQLink } from './FAQLink';
 
 export const Categories = () => {
   const { data, isLoading } = useGetCategoriesQuery();
@@ -40,7 +40,9 @@ export const Categories = () => {
         </div>
       )}
 
-      <FAQLink />
+      <Link to="faq" className="text-light-gray text-xs w-fit hover-text">
+        FAQ
+      </Link>
     </div>
   );
 };

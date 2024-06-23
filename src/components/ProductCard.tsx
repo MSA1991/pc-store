@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { toast } from 'react-toastify';
+
 import { Products } from '../types/Products';
 import { Price } from './Price';
 import { FavoriteIcon } from './Icon/FavoriteIcon';

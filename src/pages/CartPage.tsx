@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { AnimatePresence, motion as m } from 'framer-motion';
+
 import { CartProduct } from '../components/CartProduct';
+import { Button } from '../components/UI/Button';
 import { useAppSelector } from '../store/hooks';
 import { AnimatedPage } from './AnimatedPage';
-import { Button } from '../components/UI/Button';
 
 export const CartPage = () => {
   const cart = useAppSelector(({ user }) => user.cart);

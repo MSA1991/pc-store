@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { AnimatedPage } from './AnimatedPage';
 import { faq } from '../data/faq';
 import { Accordion } from '../components/UI/Accordion';

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+
 import { Filter } from './Filter';
 import { Categories } from './Categories';
 import { Advertisement } from './Advertisement';

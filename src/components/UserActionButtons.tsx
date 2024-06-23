@@ -1,13 +1,14 @@
 import { toast } from 'react-toastify';
+
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { Button } from './UI/Button';
+import { FavoriteIcon } from './Icon/FavoriteIcon';
+import { CartIcon } from './Icon/CartIcon';
+import { Products } from '../types/Products';
 import {
   toggleProductInCart,
   toggleProductInFavorites,
 } from '../store/userSlice';
-import { Button } from './UI/Button';
-import { FavoriteIcon } from './Icon/FavoriteIcon';
-import { Products } from '../types/Products';
-import { CartIcon } from './Icon/CartIcon';
 
 type Props = {
   product: Products;

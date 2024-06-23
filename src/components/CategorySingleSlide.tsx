@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import { Category } from '../types/Category';
 import { Button } from './UI/Button';
 

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { Banner } from '../components/Banner';
 import { CategorySlider } from '../components/CategorySlider';
 import { RelatedProducts } from '../components/RelatedProducts';
@@ -17,7 +18,7 @@ export const HomePage = () => {
         <CategorySlider />
 
         <RelatedProducts
-          text="Most popular products"
+          title="Most popular products"
           products={popularProducts}
           isLoading={isLoading}
         />
@@ -25,7 +26,7 @@ export const HomePage = () => {
         <Banner />
 
         <RelatedProducts
-          text="New products"
+          title="New products"
           products={newProducts}
           isLoading={isLoading}
         />

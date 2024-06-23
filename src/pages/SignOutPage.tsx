@@ -5,12 +5,13 @@ import { remove, ref as refDB } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../store/hooks';
+
 import { AnimatedPage } from './AnimatedPage';
 import { Button } from '../components/UI/Button';
-import { auth, database, storage } from '../firebase';
 import { ButtonSkeleton } from '../components/Skeletons/ButtonSkeleton';
 import { Or } from '../components/Or';
+import { useAppSelector } from '../store/hooks';
+import { auth, database, storage } from '../firebase';
 
 export const SignOutPage = () => {
   const [isLoading, setIsLoading] = useState(false);
