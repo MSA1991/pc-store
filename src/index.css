@@ -20,7 +20,7 @@
 
   ::-webkit-scrollbar-thumb {
     background-color: #8085ff;
-    border-radius: 5px;
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -34,6 +34,10 @@
 
   input[type='search']::-webkit-search-cancel-button {
     appearance: none;
+  }
+
+  .scroll-hidden {
+    scrollbar-width: none;
   }
 }
 

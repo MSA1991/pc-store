@@ -28,7 +28,7 @@ export const SidebarMenu = ({ toggleMenu }: Props) => {
         animate={{ transform: 'translateX(0)' }}
         exit={{ transform: 'translateX(-100%)' }}
         transition={{ duration: 0.3 }}
-        className="fixed lg:hidden top-0 left-0 w-full max-w-[280px] bg-black z-30 p-4 pt-[88px] sm:pt-[116px] sm:pl-10 h-full min-h-screen overflow-y-auto ring-2 ring-light-gray"
+        className="scroll-hidden fixed lg:hidden top-0 left-0 w-full max-w-[280px] bg-black z-30 p-4 py-[88px] sm:py-[116px] sm:pl-10 h-full min-h-screen overflow-y-auto ring-2 ring-light-gray"
       >
         <Sidebar onMobile />
       </m.div>
