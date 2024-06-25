@@ -34,7 +34,7 @@ export const Footer = () => (
       </a>
     </div>
 
-    <ul className="flex gap-2 justify-self-end">
+    <ul className="flex gap-1 sm:gap-2 justify-self-end">
       {socialMediaLinks.map(({ url, icon: Icon }) => (
         <li key={url} className="p-1">
           <a href={url} target="_blank">

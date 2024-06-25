@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
@@ -11,7 +11,7 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router>
       <App />
       <ToastContainer
         stacked
@@ -21,6 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           'dark-item border-2 border-light-gray p-2 flex justify-between font-bold'
         }
       />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
