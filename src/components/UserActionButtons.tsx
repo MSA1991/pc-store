@@ -43,7 +43,7 @@ export const UserActionButtons = ({ product }: Props) => {
   };
 
   return (
-    <div className="flex flex-row gap-5">
+    <div className="flex flex-row gap-2 sm:gap-5">
       <Button onClick={handleToggleProductInCart} wFull>
         <CartIcon isInCart={isInCart} />
       </Button>

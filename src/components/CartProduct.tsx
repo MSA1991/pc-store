@@ -42,8 +42,8 @@ export const CartProduct = memo(({ product }: Props) => {
 
   return (
     <article className="flex dark-item h-24 sm:h-32 md:h-44 overflow-hidden">
-      <div className="w-8 md:w-10 grid place-items-center">
-        <button className="p-1" onClick={handleToggleProductInCart}>
+      <div className="w-6 sm:w-8 md:w-10 grid place-items-center">
+        <button onClick={handleToggleProductInCart}>
           <MdDeleteOutline className="icon" />
         </button>
       </div>

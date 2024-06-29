@@ -40,7 +40,7 @@ export const ProductSkeleton = () => (
         </div>
       </div>
 
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-row gap-2 sm:gap-5">
         <ButtonSkeleton wFull />
         <ButtonSkeleton wFull />
       </div>

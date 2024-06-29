@@ -36,7 +36,7 @@ export const CartPage = () => {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="pb-5">
+                    <div className="pb-2 sm:pb-5">
                       <CartProduct product={product} />
                     </div>
                   </m.li>

@@ -57,7 +57,7 @@ export const ProductCard = ({ product }: Props) => {
       </div>
 
       <button
-        className="absolute top-1 right-1 w-8 h-8 grid place-items-center bg-black/80 backdrop-blur-sm rounded"
+        className="absolute top-1 right-1 w-8 h-8 grid place-items-center bg-blur rounded"
         onClick={handleToggleProductInFavorites}
       >
         <FavoriteIcon isFavorite={isFavorite} blueColor />

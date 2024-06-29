@@ -1,10 +1,11 @@
 import { useDeferredValue, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Logo } from './Logo';
+
 import { Input } from './UI/Input';
-import { SearchedProducts } from './SearchedProducts';
 import { BurgerButton } from './UI/BurgerButton';
-import { SidebarMenu } from './SidebarMenu';
+import { SearchedProducts } from './SearchedProducts';
+import { Menu } from './Menu';
+import { Logo } from './Logo';
 import { UserActionIcons } from './UserActionIcons';
 
 export const Header = () => {
@@ -53,7 +54,7 @@ export const Header = () => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {isOpenMenu && <SidebarMenu toggleMenu={toggleMenu} />}
+        {isOpenMenu && <Menu toggleMenu={toggleMenu} />}
       </AnimatePresence>
     </header>
   );

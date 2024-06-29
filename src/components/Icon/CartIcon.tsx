@@ -23,7 +23,7 @@ export const CartIcon = ({ isInCart }: Props) => {
           <>
             <m.circle
               initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              animate={{ pathLength: 1.2 }}
               exit={{ pathLength: 0 }}
               cx="9"
               cy="21"
@@ -32,7 +32,7 @@ export const CartIcon = ({ isInCart }: Props) => {
             />
             <m.circle
               initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              animate={{ pathLength: 1.2 }}
               exit={{ pathLength: 0 }}
               cx="20"
               cy="21"
