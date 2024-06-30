@@ -35,7 +35,7 @@ export const SearchedProducts = ({ query }: Props) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -150, scale: 0 }}
       transition={{ duration: 0.3 }}
-      className="max-w-md max-h-80 overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray border-2 border-light-gray z-20"
+      className="max-w-md max-h-80 scroll-small overflow-y-auto absolute top-12 sm:top-16 left-0.5 right-0.5 mr-auto ml-auto rounded-md p-2 bg-gray border-2 border-light-gray z-20"
     >
       {isLoading && <SearchedProductsSkeleton />}
 
@@ -48,7 +48,7 @@ export const SearchedProducts = ({ query }: Props) => {
                   to={`categories/${categoryId}/${id}`}
                   className="flex gap-2 sm:gap-5 dark-item overflow-hidden hover-border"
                 >
-                  <div className="w-28 aspect-square">
+                  <div className="w-24 sm:w-28 aspect-square shrink-0">
                     <LazyLoadImage
                       src={image}
                       alt={title}
