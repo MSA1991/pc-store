@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AnimatePresence, motion as m } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 
 import { CartProduct } from '../components/CartProduct';
 import { Button } from '../components/UI/Button';
@@ -29,7 +29,6 @@ export const CartPage = () => {
               <AnimatePresence initial={false}>
                 {cart.map((product) => (
                   <m.li
-                    layout
                     key={product.id}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}

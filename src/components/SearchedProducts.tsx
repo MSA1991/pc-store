@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion as m } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useGetProductsQuery } from '../store/storeApi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Highlighter from 'react-highlight-words';

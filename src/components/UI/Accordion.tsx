@@ -1,4 +1,5 @@
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { memo } from 'react';
+import { m, AnimatePresence } from 'framer-motion';
 import { FaMinus } from 'react-icons/fa6';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
   isOpen: boolean;
 };
 
-export const Accordion = ({ question, answer, isOpen }: Props) => (
+export const Accordion = memo(({ question, answer, isOpen }: Props) => (
   <div className="dark-item p-5 cursor-pointer hover-text">
     <div className="flex justify-between items-center gap-10">
       <p className="font-bold text-base sm:text-lg">{question}</p>
@@ -47,4 +48,4 @@ export const Accordion = ({ question, answer, isOpen }: Props) => (
       )}
     </AnimatePresence>
   </div>
-);
+));

@@ -1,4 +1,4 @@
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
 
 type Props = {

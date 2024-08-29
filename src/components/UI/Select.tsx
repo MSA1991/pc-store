@@ -1,7 +1,8 @@
 import { memo, useState } from 'react';
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { IoIosArrowDown } from 'react-icons/io';
 import { clsx } from 'clsx';
+
 import { SortingOptions } from '../../types/ProductsFilter';
 
 type Props = {

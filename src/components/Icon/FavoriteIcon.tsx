@@ -1,4 +1,4 @@
-import { AnimatePresence, motion as m } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 
 type Props = {
   isFavorite: boolean;

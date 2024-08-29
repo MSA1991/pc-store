@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion as m } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { Sidebar } from './Sidebar';
 import { Logo } from './Logo';

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
+
 import { InputIcon } from './InputIcon';
 
 type Props = {

@@ -1,4 +1,4 @@
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { IconType } from 'react-icons';
 
 type Props = {
@@ -28,7 +28,7 @@ export const NotificationIcon = ({ icon: Icon, quantity }: Props) => {
                 exit={{ opacity: 0, scale: 0.5, y: 6 }}
                 transition={{ duration: 0.3 }}
               >
-                {quantity}
+                {quantity > 9 ? '9+' : quantity}
               </m.div>
             </AnimatePresence>
           </m.div>

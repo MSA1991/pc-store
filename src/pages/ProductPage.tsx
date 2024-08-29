@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { toast } from 'react-toastify';
 
@@ -115,11 +115,11 @@ export const ProductPage = () => {
               />
 
               <div className="flex items-center gap-2">
-                {dataProduct.rating.toFixed(1)}
+                <span>{dataProduct.rating.toFixed(1)}</span>
 
                 <RatingStars rating={dataProduct.rating} />
 
-                <span className="text-light-gray">
+                <span className="text-light-gray leading-none">
                   ({dataProduct.reviews} ratings)
                 </span>
               </div>
@@ -137,7 +137,7 @@ export const ProductPage = () => {
                         className="flex gap-1 text-sm lg:text-base"
                       >
                         <div>{spec}</div>
-                        <div className="w-4 grow border-b-2 border-light-gray border-dotted -translate-y-1"></div>
+                        <div className="w-10 sm:w-4 grow border-b-2 border-light-gray border-dotted -translate-y-1"></div>
                         <div className="text-end">{value}</div>
                       </li>
                     )

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { motion as m } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setFilters } from '../store/filterSlice';

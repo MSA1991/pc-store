@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import { motion as m } from 'framer-motion';
+import { m } from 'framer-motion';
 
 type Props = {
   children: JSX.Element;

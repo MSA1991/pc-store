@@ -1,4 +1,4 @@
-import { motion, MotionConfig } from 'framer-motion';
+import { m, MotionConfig } from 'framer-motion';
 
 type Props = {
   isOpen: boolean;
@@ -11,30 +11,30 @@ export const BurgerButton = ({ isOpen, onToggle }: Props) => (
       duration: 0.3,
     }}
   >
-    <motion.button
+    <m.button
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       onClick={onToggle}
       className="w-6 h-6 grid place-items-center"
     >
       <div className="relative w-6 h-4 z-50">
-        <motion.span
+        <m.span
           variants={VARIANTS.top}
           className="absolute top-0 left-0 h-1 w-full bg-white rounded-full"
           style={{ y: '-50%' }}
         />
-        <motion.span
+        <m.span
           variants={VARIANTS.middle}
           className="absolute top-1/2 left-0 h-1 w-full bg-white rounded-full"
           style={{ y: '-50%' }}
         />
-        <motion.span
+        <m.span
           variants={VARIANTS.bottom}
           className="absolute bottom-0 left-0 h-1 w-1/2 bg-white rounded-full"
           style={{ y: '50%' }}
         />
       </div>
-    </motion.button>
+    </m.button>
   </MotionConfig>
 );
 

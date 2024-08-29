@@ -1,3 +1,4 @@
+import { useMemo, useState, useCallback } from 'react';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 
 type Props = {
@@ -7,24 +8,48 @@ type Props = {
 const NUMBER_OF_STARS = 5;
 
 export const RatingStars = ({ rating }: Props) => {
-  const width = Math.round((rating * 100) / NUMBER_OF_STARS);
+  const [currentRating, setCurrentRating] = useState(rating);
+  const [visibleRating, setVisibleRating] = useState(rating);
+
+  const starsWidth = useMemo(
+    () => Math.round((visibleRating * 100) / NUMBER_OF_STARS),
+    [visibleRating]
+  );
+
+  const handleChangeCurrentRating = useCallback((newRating: number) => {
+    setCurrentRating(newRating);
+  }, []);
+
+  const handleChangeVisibleRating = useCallback((newRating: number) => {
+    setVisibleRating(newRating);
+  }, []);
 
   return (
     <div className="relative">
-      <div className="flex">
+      <ul className="flex relative z-20">
         {[...Array(NUMBER_OF_STARS)].map((_, i) => (
-          <FaRegStar key={i} className="text-blue w-5 h-5 shrink-0" />
+          <li
+            className="cursor-pointer"
+            key={i}
+            onMouseEnter={() => handleChangeVisibleRating(i + 1)}
+            onMouseLeave={() => handleChangeVisibleRating(currentRating)}
+            onClick={() => handleChangeCurrentRating(i + 1)}
+          >
+            <FaRegStar className="text-blue w-5 h-5 shrink-0" />
+          </li>
         ))}
-      </div>
+      </ul>
 
-      <div
+      <ul
         className="flex overflow-hidden absolute top-0 left-0"
-        style={{ width: `${width}%` }}
+        style={{ width: `${starsWidth}%` }}
       >
         {[...Array(NUMBER_OF_STARS)].map((_, i) => (
-          <FaStar key={i} className="text-blue w-5 h-5 shrink-0" />
+          <li key={i}>
+            <FaStar className="text-blue w-5 h-5 shrink-0" />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
